@@ -10,9 +10,10 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Check from './pages/Check';
 
-import './App.css'
-
 function App() {
+
+  const SERVER_URL=import.meta.env.VITE_SERVER_URL
+  console.log(SERVER_URL);
 
   return (
     <>
@@ -20,7 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
 
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/signup" element={<Signup SERVER_URL={SERVER_URL} />} />
 
           <Route path='/dashboard' element={<Dashboard />} />
 
@@ -30,9 +31,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       <ToastContainer position='top-center' toastClassName="single-line-toast" />
-
     </>
-
   )
 }
 

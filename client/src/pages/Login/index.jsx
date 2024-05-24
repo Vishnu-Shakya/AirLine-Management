@@ -1,62 +1,46 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+
 import './login.css';
 
-const Login = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+function Login() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Add your login logic here
-        console.log('Username:', username);
-        console.log('Password:', password);
-    };
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log('Login:', { email, password });
+  };
 
-    return (
-        <div className="login-container">
-            <div className="login-box">
-                <h2>Login</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="input-group">
-                        <label htmlFor="username">
-                            <i className="fas fa-user"></i> Username
-                        </label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Type your username"
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="password">
-                            <i className="fas fa-lock"></i> Password
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Type your password"
-                            required
-                        />
-                    </div>
-                    <a href="/forgot-password" className="forgot-password">Forgot password?</a>
-                    <button type="submit" className="login-button">LOGIN</button>
-                </form>
-                <p>Or Sign Up Using</p>
-                <div className="social-login">
-                    <button className="social-button facebook"><i className="fab fa-facebook-f"></i></button>
-                    <button className="social-button twitter"><i className="fab fa-twitter"></i></button>
-                    <button className="social-button google"><i className="fab fa-google"></i></button>
-                </div>
-                <p>Or Sign Up Using</p>
-                <a href="/signup" className="signup-link">SIGN UP</a>
-            </div>
-        </div>
-    );
-};
+  return (
+    <div className="login-container">
+      <h2 className="login-title">Login</h2>
+      <form onSubmit={handleSubmit} className="login-form">
+        <label className="login-label" htmlFor="login-email">Email:</label>
+        <input
+          type="email"
+          id="login-email"
+          className="login-input"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <label className="login-label" htmlFor="login-password">Password:</label>
+        <input
+          type="password"
+          id="login-password"
+          className="login-input"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button type="submit" className="login-button">Login</button>
+      </form>
+      <p className="login-text">
+        Don't have an account? <Link to="/signup" className="login-link">Sign up here</Link>
+      </p>
+    </div>
+  );
+}
 
 export default Login;
