@@ -25,7 +25,7 @@ client/
 
 notice, you need client and server runs concurrently in different terminal session, in order to make them talk to each other
 
-## Client-side usage(PORT: 3000)
+## Client-side usage(PORT: 5178)
 ```terminal
 $ cd client           // go to client folder
 $ npm i              // npm install packages
