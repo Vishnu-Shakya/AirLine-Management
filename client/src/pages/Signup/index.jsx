@@ -12,7 +12,7 @@ function Signup({ SERVER_URL }) {
     const navigate = useNavigate();
     const handleSignUpSubmit = async (e) => {
         e.preventDefault();
-        let id=null;
+        let loadToast=null;
         let name = e.target.form.name.value;
         let email = e.target.form.email.value
         let password = e.target.form.password.value
@@ -26,25 +26,24 @@ function Signup({ SERVER_URL }) {
             console.log(formData);
             try {
                 console.log(SERVER_URL + '/signup');
-                id = toast.loading("please wait...");
+                loadToast = toast.loading("please wait...");
                 const response = await axios.post(SERVER_URL + '/signup', formData);
                 console.log(response);
                 if (response.status == 201) {
-                    toast.dismiss(id);
+                    toast.dismiss(loadToast);
                     toast.success("Registration successfull");
                     navigate("/");
                 }
                 else {
-                    toast.dismiss(id);
+                    toast.dismiss(loadToast);
                     toast.error('something went  wrong try again ', {
                         className: 'single-line-toast'
                     }
                     )
                 }
             } catch (err) {
-                toast.dismiss(id);
+                toast.dismiss(loadToast);
                 toast.error(err.response.data.msg);
-                toast.error('Try Again');
                 console.log(err);
             }
         }
