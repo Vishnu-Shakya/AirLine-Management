@@ -4,8 +4,6 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
 
-
-
 import './signup.css'
 
 function Signup({ SERVER_URL }) {
@@ -31,6 +29,7 @@ function Signup({ SERVER_URL }) {
                 console.log(response);
                 if (response.status == 201) {
                     toast.dismiss(loadToast);
+                    localStorage.setItem('accessToken',response.data.token)
                     toast.success("Registration successfull");
                     navigate("/");
                 }

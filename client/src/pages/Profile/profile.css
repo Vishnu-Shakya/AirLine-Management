@@ -1,0 +1,85 @@
+.flex {
+    display: flex;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .left {
+    width: 25%;
+    padding: 20px;
+    text-align: center;
+    background: white;
+    margin: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .right {
+    width: 75%;
+    padding: 20px;
+  }
+  
+  .nav-link {
+    margin: 10px 0;
+    cursor: pointer;
+  }
+  
+  .profile-info {
+    background: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-info h3 {
+    margin-bottom: 10px;
+  }
+  
+  .profile-info p {
+    color: gray;
+    margin-bottom: 20px;
+  }
+  
+  .profile-details, .profile-form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .profile-detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  
+  .profile-detail label {
+    width: 30%;
+    font-weight: bold;
+  }
+  
+  .profile-detail input {
+    width: 70%;
+    padding: 5px;
+  }
+  
+  .edit-button, .save-button, .cancel-button {
+    background: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 10px;
+  }
+  
+  .save-button {
+    background: #28a745;
+  }
+  
+  .cancel-button {
+    background: #dc3545;
+    margin-left: 10px;
+  }
+  

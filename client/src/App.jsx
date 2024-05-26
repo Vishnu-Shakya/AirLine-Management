@@ -9,9 +9,13 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Check from './pages/Check';
+import Profile from './pages/Profile';
+
+
+import PrivateRoutes from './utils/privateRoutes';
 
 function App() {
-
+  
   const SERVER_URL=import.meta.env.VITE_SERVER_URL
   console.log(SERVER_URL);
 
@@ -20,7 +24,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-
+          <Route element={<PrivateRoutes SERVER_URL={SERVER_URL} />}>
+                <Route element={< Profile SERVER_URL={SERVER_URL} />} path="/profile"/>
+          </Route>
           <Route path="/signup" element={<Signup SERVER_URL={SERVER_URL} />} />
 
           <Route path='/dashboard' element={<Dashboard />} />

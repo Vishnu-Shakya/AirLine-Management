@@ -5,14 +5,52 @@ const bcrypt = require("bcrypt");
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
+        default: ''
     },
-
-    email:{
+    email: {
         type: String,
+        default: ''
     },
     password: {
         type: String,
+        default: ''
     },
+    gender: {
+        type: String,
+        default: ''
+    },
+    maritalStatus: {
+        type: String,
+        default: ''
+    },
+    address: {
+        add: {
+            type: String,
+            default: ''
+        },
+        pincode: {
+            type: Number,
+            default: 0
+        },
+        state: {
+            type: String,
+            default: ''
+        }
+    },
+    bookedTicket: [
+        {
+            ticketId: {
+                type: String,
+            }
+        }
+    ],
+    ticketHistory: [
+        {
+            ticketId: {
+                type: String,
+            }
+        }
+    ]
 });
 
 UserSchema.pre("save", async function(){
