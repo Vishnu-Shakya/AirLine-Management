@@ -16,20 +16,20 @@ const Profile = ({SERVER_URL}) => {
     
   });
 
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const userId = '60c72b2f9b1e8b6f1d8e4d3c'; // Replace with dynamic ID as needed
-        const response = await axios.get(`http://localhost:3000/profile/${userId}`);
-        setProfile(response.data);
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchProfile();
-  }, []);
+  // useEffect(() => {
+  //   const fetchProfile = async () => {
+  //     try {
+  //       const userId = '60c72b2f9b1e8b6f1d8e4d3c'; // Replace with dynamic ID as needed
+  //       const response = await axios.get(`http://localhost:3000/profile/${userId}`);
+  //       setProfile(response.data);
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+  //   fetchProfile();
+  // }, []);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
