@@ -1,44 +1,51 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import userimg from "../../assets/person.png";
+import emailimg from "../../assets/email.png";
+import passimg from "../../assets/password.png";
+
 
 import './login.css';
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log('Login:', { email, password });
-  };
+  // const handleSubmit = (event) => {
+  //   event.preventDefault();
+  //   console.log('Login:', { email, password });
+  
 
   return (
-    <div className="login-container">
-      <h2 className="login-title">Login</h2>
-      <form onSubmit={handleSubmit} className="login-form">
-        <label className="login-label" htmlFor="login-email">Email:</label>
-        <input
-          type="email"
-          id="login-email"
-          className="login-input"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <label className="login-label" htmlFor="login-password">Password:</label>
-        <input
-          type="password"
-          id="login-password"
-          className="login-input"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit" className="login-button">Login</button>
-      </form>
-      <p className="login-text">
-        Don't have an account? <Link to="/signup" className="login-link">Sign up here</Link>
-      </p>
+    <div className='first'>
+     <div className = "login-container">
+        <h1 className='h1'>Sign in</h1>
+        <div className="inputs">
+          <div className="input">
+            <img src={userimg} alt="" />
+            <input type="text" placeholder='Name' />
+          </div>
+
+          <div className="input">
+            <img src={emailimg} alt="" />
+            <input type="email" placeholder='Email Id' />
+          </div>
+
+          <div className="input">
+            <img src={passimg} alt="" />
+            <input type="password" placeholder='Password' />
+          </div>
+        </div>
+        
+        <div className="submit">
+          <button className="sub">Sign in</button>
+          <button className="sub">Sign up</button>
+        </div>
+
+        
+
+        </div>
+        
     </div>
   );
 }
