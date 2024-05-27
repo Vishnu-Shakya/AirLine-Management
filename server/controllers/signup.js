@@ -1,3 +1,4 @@
+const { response } = require('express');
 const User = require('../models/Users.js');
 const jwt = require('jsonwebtoken');
 
@@ -35,20 +36,28 @@ const signup = async (req, res) => {
 
 
 const login = async (req, res) => {
+    // console.log(req.body);
     const { email, password } = req.body;
-    if (email.length && password.length) {
-        const foundUser = await User.findOne({ email: email });
-        if (foundUser != null) {
-            if (await foundUser.comparePassword(password)) {
-                res.status(200).json({ msg: " Successfully Login " });
+    try {
+        if (email.length && password.length) {
+            const foundUser = await User.findOne({ email: email });
+            if (foundUser != null) {
+                if (await foundUser.comparePassword(password)) {
+                    const secretKey = process.env.JWT_SECRET;
+                    const token = jwt.sign({ data: foundUser }, secretKey, { expiresIn: '7d' });
+                    res.status(200).json({ msg: " Successfully Login ",user:foundUser,token:token });
+                }
+                else {
+                    res.status(401).json({ msg: 'Password Incorrect' });
+                }
             }
             else {
-                res.status(401).json({ msg: 'Password Incorrect' });
+                res.status(401).json({ msg: "Email not Exist" });
             }
         }
-        else {
-            res.status(401).json({ msg: "Email not Exist" });
-        }
+        
+    } catch (error) {
+        response.status(500).json({msg:'Internal Server Error'});
     }
 }
 const auth = async (req, res) => {

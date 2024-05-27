@@ -31,7 +31,7 @@ function App() {
 
           <Route path='/dashboard' element={<Dashboard />} />
 
-          <Route path="/login" element={<Login/>} />
+          <Route path="/login" element={<Login SERVER_URL={SERVER_URL}/>} />
   
           <Route path="/check" element={<Check />} />
         </Routes>
