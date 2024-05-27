@@ -39,7 +39,7 @@ function Login() {
         
         <div className="submit">
           <button className="sub">Sign in</button>
-          <button className="sub">Sign up</button>
+          <Link to='/signup' className="sub">Sign up</Link>
         </div>
 
         

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const { profile } = require("../controllers/signup");
 
 
 const UserSchema = new mongoose.Schema({
@@ -19,6 +20,10 @@ const UserSchema = new mongoose.Schema({
         type: String,
         default: ''
     },
+    birthday:{
+        type:String,
+    }
+    ,
     maritalStatus: {
         type: String,
         default: ''

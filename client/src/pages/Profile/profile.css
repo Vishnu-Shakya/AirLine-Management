@@ -23,10 +23,20 @@
   }
   
   .nav-link {
-    margin: 10px 0;
     cursor: pointer;
+    width:75%;
+    height: 36px;
+    text-align: start;
+    padding-left: 0.8rem ;
+    margin-left: 1rem;
+    align-items: center;
   }
-  
+  .nav-active{
+    background: rgb(0 140 255 / 10%);
+    color: blue;
+    border-radius: 2px;
+  }
+
   .profile-info {
     background: white;
     padding: 20px;
@@ -60,7 +70,7 @@
     font-weight: bold;
   }
   
-  .profile-detail input {
+  .profile-detail input,select {
     width: 70%;
     padding: 5px;
   }

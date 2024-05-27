@@ -29,7 +29,8 @@ function Signup({ SERVER_URL }) {
                 console.log(response);
                 if (response.status == 201) {
                     toast.dismiss(loadToast);
-                    localStorage.setItem('accessToken',response.data.token)
+                    localStorage.setItem('accessToken',response.data.token);
+                    localStorage.setItem('userId',response.data.newUser._id);
                     toast.success("Registration successfull");
                     navigate("/");
                 }
