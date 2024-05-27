@@ -1,9 +1,21 @@
 
-## clone or download
+## clone 
 ```terminal
 $ git clone https://github.com/Vishnu-Shakya/AirLine-Management.git
-$ npm i
+
 ```
+## Client-side usage(PORT: 5178)
+```terminal
+$ cd client           // go to client folder
+$ npm i              // npm install packages
+$ npm run dev -- --mode production
+$ npm run dev -- --mode development  // for run server locally 
+
+
+## Server-side usage(PORT: 3000)
+
+
+
 
 ## project structure
 ```terminal
@@ -25,11 +37,3 @@ client/
 
 notice, you need client and server runs concurrently in different terminal session, in order to make them talk to each other
 
-## Client-side usage(PORT: 5178)
-```terminal
-$ cd client           // go to client folder
-$ npm i              // npm install packages
-$ npm run dev       // run it locally
-
-
-## Server-side usage(PORT: 3000)
