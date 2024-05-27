@@ -10,11 +10,12 @@ function Signup({ SERVER_URL }) {
     const navigate = useNavigate();
     const handleSignUpSubmit = async (e) => {
         e.preventDefault();
-        let loadToast=null;
+        let loadToast = null;
         let name = e.target.form.name.value;
         let email = e.target.form.email.value
         let password = e.target.form.password.value
         if (name.length > 0 && email.length > 0 && password.length > 0) {
+
 
             const formData = {
                 name: name,
@@ -22,34 +23,41 @@ function Signup({ SERVER_URL }) {
                 password: password
             };
             console.log(formData);
-            try {
-                console.log(SERVER_URL + '/signup');
-                loadToast = toast.loading("please wait...");
-                const response = await axios.post(SERVER_URL + '/signup', formData);
-                console.log(response);
-                if (response.status == 201) {
-                    toast.dismiss(loadToast);
-                    localStorage.setItem('accessToken',response.data.token);
-                    localStorage.setItem('userId',response.data.newUser._id);
-                    toast.success("Registration successfull");
-                    navigate("/");
-                }
-                else {
-                    toast.dismiss(loadToast);
-                    toast.error('something went  wrong try again ', {
-                        className: 'single-line-toast'
+            if (e.target.form.email.validity.valid==false) {
+                toast.error('Enter a Valid Email');
+            }
+            else {
+
+                try {
+                    console.log(SERVER_URL + '/signup');
+                    loadToast = toast.loading("please wait...");
+                    const response = await axios.post(SERVER_URL + '/signup', formData);
+                    console.log(response);
+                    if (response.status == 201) {
+                        toast.dismiss(loadToast);
+                        localStorage.setItem('accessToken', response.data.token);
+                        localStorage.setItem('userId', response.data.newUser._id);
+                        toast.success("Registration successfull");
+                        navigate("/");
                     }
-                    )
+                    else {
+                        toast.dismiss(loadToast);
+                        toast.error('something went  wrong try again ', {
+                            className: 'single-line-toast'
+                        }
+                        )
+                    }
+                } catch (err) {
+                    toast.dismiss(loadToast);
+                    toast.error(err.response.data.msg);
+                    console.log(err);
                 }
-            } catch (err) {
-                toast.dismiss(loadToast);
-                toast.error(err.response.data.msg);
-                console.log(err);
             }
         }
         else {
             toast.error("please fill all feild");
         }
+
 
     }
 
@@ -65,7 +73,7 @@ function Signup({ SERVER_URL }) {
                             <input type="text" id="name" placeholder="eg. Vishnu" name='name' required />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="email">Email </label>
+                            {/* <label htmlFor="email">Email </label> */}
                             <input type="email" id="email" placeholder=" abc@gmail.com" name='email' required />
                         </div>
                         <div className="form-group">
@@ -76,7 +84,7 @@ function Signup({ SERVER_URL }) {
                             <p>Already have Account</p>
                             <Link to="/login" className=' mr-1 text-blue-600 text-[1.1rem] hover:underline'> Login </Link>
                         </div>
-                        <button onClick={handleSignUpSubmit} className="signup-button">Sign Up</button>
+                        <button type='submit' onClick={handleSignUpSubmit} className="signup-button">Sign Up</button>
                     </form>
                 </div>
             </div>

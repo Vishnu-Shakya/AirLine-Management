@@ -7,7 +7,7 @@
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background-image: url('https://source.unsplash.com/random/900x700/?airoplane');
+  background-image: url('https://images.pexels.com/photos/62623/wing-plane-flying-airplane-62623.jpeg?cs=srgb&dl=pexels-pixabay-62623.jpg&fm=jpg');
   background-size: cover; /* Ensure the image covers the entire element */
   background-position: center; /* Center the image */
   background-repeat: no-repeat; /* Prevent the image from repeating */
@@ -56,14 +56,14 @@
   padding: 0.75rem;
   border: none;
   border-radius: 4px;
-  background-color: #ff7f50;
+  background-color: #1679AB;
   color: #ffffff;
   font-size: 1rem;
   cursor: pointer;
 }
 
 .signup-button:hover {
-  background-color: #e76b3c;
+  background-color:#0c5d85;
 }
 
 .remember-me {
