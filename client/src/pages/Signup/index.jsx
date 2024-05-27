@@ -3,6 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from 'axios';
+import userimg from "../../assets/person.png";
+import emailimg from "../../assets/email.png";
+import passimg from "../../assets/password.png";
 
 import './signup.css'
 
@@ -69,26 +72,27 @@ function Signup({ SERVER_URL }) {
                     <h2>Signup to SkyTrip</h2>
                     <form>
                         <div className="form-group">
-                            <label htmlFor="name">Your Name</label>
-                            <input type="text" id="name" placeholder="eg. Vishnu" name='name' required />
+                        <img src={userimg} alt="" />
+                            <input type="text" id="name" placeholder="Your Name" name='name' required />
                         </div>
                         <div className="form-group">
-                            {/* <label htmlFor="email">Email </label> */}
-                            <input type="email" id="email" placeholder=" abc@gmail.com" name='email' required />
+                        <img src={emailimg} alt="" />
+                            <input type="email" id="email" placeholder="Your Email" name='email' required />
                         </div>
                         <div className="form-group">
-                            <label htmlFor="password">Password</label>
-                            <input type="text" id="password" placeholder="Enter Password" name='password' required />
+                        <img src={passimg} alt="" />
+                            <input type="password" id="password" placeholder="Enter Password" name='password' required />
                         </div>
-                        <div className="form-group remember-me  justify-between">
-                            <p>Already have Account</p>
+                        <div className="remember-me  justify-between">
+                            <p>Already have an account? </p>
                             <Link to="/login" className=' mr-1 text-blue-600 text-[1.1rem] hover:underline'> Login </Link>
                         </div>
-                        <button type='submit' onClick={handleSignUpSubmit} className="signup-button">Sign Up</button>
+                        <button onClick={handleSignUpSubmit} className="signup-button">Sign Up</button>
                     </form>
                 </div>
             </div>
         </div>
+        
     );
 }
 
