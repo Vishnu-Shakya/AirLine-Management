@@ -4,6 +4,7 @@ import './profile.css';
 import axios from 'axios';
 import avatar from '../../assets/avatar.jpeg'
 import { toast } from 'react-toastify';
+import FlightCard from "../../components/FlightCard.jsx"
 
 const Profile = ({ SERVER_URL }) => {
   const [isEditing, setIsEditing] = useState(false);
@@ -113,6 +114,7 @@ const Profile = ({ SERVER_URL }) => {
   }
 
   return (
+    <div>
     <div className="flex w-4/5 mx-auto">
       <div className="left">
         <div className="flex flex-col justify-center items-center m-4">
@@ -209,6 +211,12 @@ const Profile = ({ SERVER_URL }) => {
           )}
         </div>
       </div>
+    </div>
+    <div className="booked-heading">
+        Your Previous Bookings
+      </div>
+
+          <FlightCard></FlightCard>
     </div>
   );
 };
