@@ -76,12 +76,14 @@ button:hover {
   position: absolute;
   top: 0;
   width: 100%;
+  font-family: Arial, sans-serif;
 }
 
 .header h1 {
   flex: 10;
   margin: 0;
   text-align: left;
+  font-family: Arial, sans-serif;
 
 }
 
