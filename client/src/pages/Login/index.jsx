@@ -1,62 +1,99 @@
-import React, { useState } from 'react';
-import './login.css';
+import React, { useState } from "react";
+import { Link,useNavigate } from "react-router-dom";
+import userimg from "../../assets/person.png";
+import emailimg from "../../assets/email.png";
+import passimg from "../../assets/password.png";
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
-const Login = () => {
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+import "./login.css";
 
-    const handleSubmit = (e) => {
+function Login({ SERVER_URL }) {
+    const navigate = useNavigate();
+    const handleLoginSubmit = async (e) => {
         e.preventDefault();
-        // Add your login logic here
-        console.log('Username:', username);
-        console.log('Password:', password);
-    };
+        console.log(e.target.form)
+        let loadToast = null;
+        let email = e.target.form.email.value
+        let password = e.target.form.password.value
+        if (email.length > 0 && password.length > 0) {
+            const formData = {
+                email: email,
+                password: password
+            };
+            console.log(formData);
+            if (e.target.form.email.validity.valid == false) {
+                toast.error('Enter a Valid Email');
+            }
+            else {
 
+                try {
+                    loadToast = toast.loading("please wait...");
+                    console.log(SERVER_URL + '/login')
+                    const response = await axios.post(SERVER_URL + '/login', formData);
+                    console.log(response);
+                    if (response.status == 200) {
+                        toast.dismiss(loadToast);
+                        localStorage.setItem('accessToken', response.data.token);
+                        localStorage.setItem('userId', response.data.user._id);
+                        navigate("/");
+                        toast.success(response.data.msg);
+                    }
+                    else {
+                        toast.error('Try Again')
+                    }
+                } catch (err) {
+
+                    if (err.response && (err.response.status == 401 || err.response.status == 500)) {
+                        toast.dismiss(loadToast);
+                        toast.error(err.response.data.msg, {
+                            className: 'single-line-toast'
+                        }
+                        )
+                    }
+                    else {
+                        toast.dismiss(loadToast);
+                        toast.error('problem with the fetch operation');
+                        console.log(err);
+
+                    }
+
+                }
+            }
+        }
+        else {
+            toast.error("please fill all feild");
+        }
+    }
     return (
-        <div className="login-container">
-            <div className="login-box">
-                <h2>Login</h2>
-                <form onSubmit={handleSubmit}>
-                    <div className="input-group">
-                        <label htmlFor="username">
-                            <i className="fas fa-user"></i> Username
-                        </label>
-                        <input
-                            type="text"
-                            id="username"
-                            value={username}
-                            onChange={(e) => setUsername(e.target.value)}
-                            placeholder="Type your username"
-                            required
-                        />
-                    </div>
-                    <div className="input-group">
-                        <label htmlFor="password">
-                            <i className="fas fa-lock"></i> Password
-                        </label>
-                        <input
-                            type="password"
-                            id="password"
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Type your password"
-                            required
-                        />
-                    </div>
-                    <a href="/forgot-password" className="forgot-password">Forgot password?</a>
-                    <button type="submit" className="login-button">LOGIN</button>
-                </form>
-                <p>Or Sign Up Using</p>
-                <div className="social-login">
-                    <button className="social-button facebook"><i className="fab fa-facebook-f"></i></button>
-                    <button className="social-button twitter"><i className="fab fa-twitter"></i></button>
-                    <button className="social-button google"><i className="fab fa-google"></i></button>
+        <div className="login-bg">
+            <div className="login-container">
+                <div className="login-form">
+                    <h2>Login to SkyTrip</h2>
+                    <form>
+                        <div className="login-form-group">
+
+                            <img src={emailimg} alt="" />
+                            <input type="email" placeholder="Email-id" name="email" />
+
+                        </div>
+                        <div className="login-form-group">
+
+                            <img src={passimg} alt="" />
+                            <input type="password" placeholder="Password" name="password" />
+
+                        </div>
+                        <div className="login-remember-me  justify-between">
+                            <p>Don't have an account? </p>
+                            <Link to="/signup" className=' mr-1 text-blue-600 text-[1.1rem] hover:underline'> Sign Up </Link>
+                        </div>
+                        <button className="login-button" onClick={handleLoginSubmit}>Login</button>
+
+                    </form>
                 </div>
-                <p>Or Sign Up Using</p>
-                <a href="/signup" className="signup-link">SIGN UP</a>
             </div>
         </div>
     );
-};
+}
 
 export default Login;
