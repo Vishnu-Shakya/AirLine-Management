@@ -1,4 +1,3 @@
-// src/FlightSearch.js
 import React from 'react';
 import './home.css';
 
