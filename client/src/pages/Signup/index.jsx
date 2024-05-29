@@ -40,15 +40,12 @@ function Signup({ SERVER_URL }) {
                         toast.dismiss(loadToast);
                         localStorage.setItem('accessToken', response.data.token);
                         localStorage.setItem('userId', response.data.newUser._id);
-                        toast.success("Registration successfull");
+                        toast.success("Registration successfull",{className: 'single-line-toast'});
                         navigate("/");
                     }
                     else {
                         toast.dismiss(loadToast);
-                        toast.error('something went  wrong try again ', {
-                            className: 'single-line-toast'
-                        }
-                        )
+                        toast.error('something went  wrong try again ',{className: 'single-line-toast'})
                     }
                 } catch (err) {
                     toast.dismiss(loadToast);
@@ -58,7 +55,7 @@ function Signup({ SERVER_URL }) {
             }
         }
         else {
-            toast.error("please fill all feild");
+            toast.error("please fill all feild",{className:'single-line-toast'});
         }
 
 

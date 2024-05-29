@@ -4,10 +4,11 @@ import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
+
 import Home from './pages/Home';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
-import Dashboard from './pages/Dashboard';
+import Search from './pages/Search';
 import Check from './pages/Check';
 import Profile from './pages/Profile';
 
@@ -23,13 +24,13 @@ function App() {
     <>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Home SERVER_URL={SERVER_URL} />} />
           <Route element={<PrivateRoutes SERVER_URL={SERVER_URL} />}>
                 <Route element={< Profile SERVER_URL={SERVER_URL} />} path="/profile"/>
           </Route>
           <Route path="/signup" element={<Signup SERVER_URL={SERVER_URL} />} />
 
-          <Route path='/dashboard' element={<Dashboard />} />
+          <Route path='/search' element={<Search />} />
 
           <Route path="/login" element={<Login SERVER_URL={SERVER_URL}/>} />
   

@@ -8,3 +8,20 @@
   margin: 0px;
   padding: 0px;
 }
+
+.single-line-toast {
+  white-space: nowrap;   /* Prevent text wrapping */
+  overflow: hidden;      /* Hide overflow text */
+  text-overflow: ellipsis; /* Show ellipsis (...) for overflowing text */
+}
+.Toastify__toast-body{
+  display: flex;
+  justify-content: space-between;
+}
+.Toastify__close-button{
+  display: flex;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin: auto;
+}

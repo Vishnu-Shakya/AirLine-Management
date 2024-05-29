@@ -9,7 +9,7 @@ body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; background-c
   align-items: center;
   height: calc(100vh - 60px); /* Adjust height to account for the header */
   margin-top: 60px; /* Adjust margin to account for the header */
-  background-image: url('./back2.jpg'); /* Placeholder image, replace with your desired image URL */
+  background-image: url('../../assets/home-bg.jpg'); /* Placeholder image, replace with your desired image URL */
   background-size: cover;
   background-position: center;
 }
@@ -21,7 +21,7 @@ body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; background-c
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
   max-width: 400px;
-  width: 100%;
+  width: 95%;
 }
 
 h1 {
@@ -87,7 +87,7 @@ button:hover {
   text-align: left;
   font-family: Arial, sans-serif;
   font-weight: bold; /* Make the logo bold */
-  font-size: 50px;
+  font-size: 40px;
 }
 
 
@@ -103,4 +103,10 @@ button:hover {
 
 .login-button:hover {
   background: #0056b3;
+}
+
+@media (max-width: 1000px) {
+   .form-container{
+    margin: auto;
+   }
 }

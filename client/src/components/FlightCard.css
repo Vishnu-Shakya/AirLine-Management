@@ -1,173 +1,54 @@
-.booked-heading
-{
-    text-align:center;
-
-    font-size:32px;
-     
+.flight-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 65vw;
+  margin: 20px;
+  margin-top: 1px;
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+}
+@media (max-width: 768px) {
+  .flight-card{
+    width: 90%;
+    padding: 8px;
+    margin: auto;
+    border-right: none;
+  }
 }
 
-.booked-container{
-    padding :20px 0;
-    width:80%;
-    text-align: center;
-    background-color: #FAF9F6;
-    border :2px solid darkblue;
-    border-radius: 40px;
-    margin:20px auto;
+.flight-info {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  background-color: #fff;
 }
 
-
-
-.booked-flight-name{
-    font-size: 2.5rem;
-    width:50%;
-    text-align: left;
-    font-weight: bold;
-    color:darkblue;
-    
+.departure,
+.arrival {
+  font-size: 24px;
+  font-weight: bold;
 }
 
-.booked-flight p{
-    
-    width:40%;
-    text-align: right;
-    
-}
-@media screen and (min-width:901px)
-{
-    .booked-flight{
-        width:100%;
-        display:flex;
-        justify-content: center;
-        align-items: baseline;
-        
-        
-        
-    }
-    
-    .booked-top{
-        display:flex;
-        width :100%;
-        margin: 0 5%;
-    }
-    
-    
-    
-    
-    .booked-from{
-        text-align: left;
-        font-weight: 400;
-        font-size: 1.5rem;
-        width:38%;
-    }
-    
-    .booked-to{
-        text-align: right;
-        font-weight: 400;
-        font-size: 1.5rem;
-        width:38%;
-    }
-    
-    .booked-time{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        font-size: 1rem;
-        width:14%;
-    }
-    
-    .booked-bottom{
-        padding-top: 30px;
-        width: 100%;
-        display: flex;
-        margin:0 5%;
-    
-    }
-    .booked-date{
-        width:45%;
-        text-align:left;
-    }
-    
-    .booked-price{
-        width :45%;
-        text-align: right;
-        
-    }
+.price {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
+.price span {
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+}
 
-@media screen and (min-width:400px) and (max-width:900px)
-{
-    
-    .booked-top{
-        display:flex;
-        flex-direction: column;
-        width :100%;
-        
-    }
-    
-    .booked-flight{
-        width:100%;
-        display:flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: baseline;
-        
-        
-        
-    }
-    .booked-flight-name{
-        font-size: 2.5rem;
-        width:100%;
-        text-align: center;
-        
-        
-    }
-    
-    .booked-flight p{
-        
-        width:100%;
-        text-align: center;
-        
-    }
-    
-    
-    .booked-from{
-        text-align: center;
-        font-weight: 400;
-        font-size: 2rem;
-        padding-bottom:1rem;
-    }
-    
-    .booked-to{
-        text-align: center;
-        font-weight: 400;
-        font-size: 2rem;
-        padding-bottom:1rem;
-    }
-    
-    .booked-time{
-        padding-bottom: 1rem;
-        flex-direction: column;
-        justify-content: center;
-        font-size: 1.2rem;
-    }
-    
-    .booked-bottom{
-        padding-top: 30px;
-        width: 100%;
-        display: flex;
-        margin:0 5%;
-    
-    }
-    .booked-date{
-        width:45%;
-        text-align:left;
-    }
-    
-    .booked-price{
-        width :45%;
-        text-align: right;
-        
-    }
+.discount {
+  background-color: #f9f9f9;
+  font-weight: 600;
+  font-size: 12px;
+  color: #4aae3a;
+  padding: 8px 16px;
+  text-align: center;
+  font-size: 14px;
 }

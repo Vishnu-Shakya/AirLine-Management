@@ -55,7 +55,6 @@ function Login({ SERVER_URL }) {
                         toast.dismiss(loadToast);
                         toast.error('problem with the fetch operation');
                         console.log(err);
-
                     }
 
                 }

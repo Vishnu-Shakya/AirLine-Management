@@ -1,0 +1,946 @@
+{
+    "flights": {
+        "meta": {
+            "count": 10,
+            "links": {
+                "self": "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=DEL&destinationLocationCode=BOM&departureDate=2024-07-01&adults=1&currencyCode=INR&max=10"
+            }
+        },
+        "data": [
+            {
+                "type": "flight-offer",
+                "id": "1",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H5M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T14:45:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-01T16:50:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "856",
+                                "aircraft": {
+                                    "code": "32N"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H5M",
+                                "id": "1",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "1",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "flight-offer",
+                "id": "2",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H10M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T20:00:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-01T22:10:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "805",
+                                "aircraft": {
+                                    "code": "77L"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H10M",
+                                "id": "2",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "2",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "flight-offer",
+                "id": "3",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H15M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T07:00:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-01T09:15:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "887",
+                                "aircraft": {
+                                    "code": "321"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H15M",
+                                "id": "3",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "3",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "flight-offer",
+                "id": "4",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H15M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T21:20:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-01T23:35:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "605",
+                                "aircraft": {
+                                    "code": "32N"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H15M",
+                                "id": "4",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "4",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "flight-offer",
+                "id": "5",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H15M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T22:30:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-02T00:45:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "814",
+                                "aircraft": {
+                                    "code": "32N"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H15M",
+                                "id": "5",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "5",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "flight-offer",
+                "id": "6",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H20M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T08:00:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-01T10:20:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "665",
+                                "aircraft": {
+                                    "code": "321"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H20M",
+                                "id": "6",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "6",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "flight-offer",
+                "id": "7",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H20M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T09:00:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-01T11:20:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "678",
+                                "aircraft": {
+                                    "code": "321"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H20M",
+                                "id": "7",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "7",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "flight-offer",
+                "id": "8",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H20M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T14:00:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-01T16:20:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "863",
+                                "aircraft": {
+                                    "code": "32N"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H20M",
+                                "id": "8",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "8",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "flight-offer",
+                "id": "9",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H20M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T17:50:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-01T20:10:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "441",
+                                "aircraft": {
+                                    "code": "77W"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H20M",
+                                "id": "9",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "9",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "type": "flight-offer",
+                "id": "10",
+                "source": "GDS",
+                "instantTicketingRequired": false,
+                "nonHomogeneous": false,
+                "oneWay": false,
+                "lastTicketingDate": "2024-07-01",
+                "lastTicketingDateTime": "2024-07-01",
+                "numberOfBookableSeats": 9,
+                "itineraries": [
+                    {
+                        "duration": "PT2H25M",
+                        "segments": [
+                            {
+                                "departure": {
+                                    "iataCode": "DEL",
+                                    "terminal": "3",
+                                    "at": "2024-07-01T19:00:00"
+                                },
+                                "arrival": {
+                                    "iataCode": "BOM",
+                                    "terminal": "2",
+                                    "at": "2024-07-01T21:25:00"
+                                },
+                                "carrierCode": "AI",
+                                "number": "624",
+                                "aircraft": {
+                                    "code": "32N"
+                                },
+                                "operating": {
+                                    "carrierCode": "AI"
+                                },
+                                "duration": "PT2H25M",
+                                "id": "10",
+                                "numberOfStops": 0,
+                                "blacklistedInEU": false
+                            }
+                        ]
+                    }
+                ],
+                "price": {
+                    "currency": "INR",
+                    "total": "6448.00",
+                    "base": "5600.00",
+                    "fees": [
+                        {
+                            "amount": "0.00",
+                            "type": "SUPPLIER"
+                        },
+                        {
+                            "amount": "0.00",
+                            "type": "TICKETING"
+                        }
+                    ],
+                    "grandTotal": "6448.00"
+                },
+                "pricingOptions": {
+                    "fareType": [
+                        "PUBLISHED"
+                    ],
+                    "includedCheckedBagsOnly": true
+                },
+                "validatingAirlineCodes": [
+                    "AI"
+                ],
+                "travelerPricings": [
+                    {
+                        "travelerId": "1",
+                        "fareOption": "STANDARD",
+                        "travelerType": "ADULT",
+                        "price": {
+                            "currency": "INR",
+                            "total": "6448.00",
+                            "base": "5600.00"
+                        },
+                        "fareDetailsBySegment": [
+                            {
+                                "segmentId": "10",
+                                "cabin": "ECONOMY",
+                                "fareBasis": "TIP",
+                                "class": "T",
+                                "includedCheckedBags": {
+                                    "weight": 15,
+                                    "weightUnit": "KG"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        ],
+        "dictionaries": {
+            "locations": {
+                "BOM": {
+                    "cityCode": "BOM",
+                    "countryCode": "IN"
+                },
+                "DEL": {
+                    "cityCode": "DEL",
+                    "countryCode": "IN"
+                }
+            },
+            "aircraft": {
+                "321": "AIRBUS A321",
+                "77W": "BOEING 777-300ER",
+                "77L": "BOEING 777-200LR",
+                "32N": "AIRBUS A320NEO"
+            },
+            "currencies": {
+                "INR": "INDIAN RUPEE"
+            },
+            "carriers": {
+                "AI": "AIR INDIA"
+            }
+        }
+    }
+}
