@@ -133,7 +133,7 @@
                                 },
                                 "duration": "PT2H10M",
                                 "id": "2",
-                                "numberOfStops": 0,
+                                "numberOfStops": 1,
                                 "blacklistedInEU": false
                             }
                         ]
@@ -224,7 +224,7 @@
                                 },
                                 "duration": "PT2H15M",
                                 "id": "3",
-                                "numberOfStops": 0,
+                                "numberOfStops": 2,
                                 "blacklistedInEU": false
                             }
                         ]
@@ -315,7 +315,7 @@
                                 },
                                 "duration": "PT2H15M",
                                 "id": "4",
-                                "numberOfStops": 0,
+                                "numberOfStops": 1,
                                 "blacklistedInEU": false
                             }
                         ]
@@ -406,7 +406,7 @@
                                 },
                                 "duration": "PT2H15M",
                                 "id": "5",
-                                "numberOfStops": 0,
+                                "numberOfStops": 2,
                                 "blacklistedInEU": false
                             }
                         ]
