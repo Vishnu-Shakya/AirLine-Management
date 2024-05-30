@@ -5,10 +5,9 @@ import emailimg from "../../assets/email.png";
 import passimg from "../../assets/password.png";
 import { toast } from 'react-toastify';
 import axios from 'axios';
-
 import "./login.css";
 
-function Login({ SERVER_URL }) {
+function Login({ SERVER_URL,handleStateChange }) {
     const navigate = useNavigate();
     const handleLoginSubmit = async (e) => {
         e.preventDefault();
@@ -36,6 +35,7 @@ function Login({ SERVER_URL }) {
                         toast.dismiss(loadToast);
                         localStorage.setItem('accessToken', response.data.token);
                         localStorage.setItem('userId', response.data.user._id);
+                        handleStateChange(localStorage.getItem('accessToken',true));
                         navigate("/");
                         toast.success(response.data.msg);
                     }

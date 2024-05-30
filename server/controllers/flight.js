@@ -11,7 +11,7 @@ const searchFlight= async (req,res)=>{
     clientSecret:'hDaRKJRmsmNsD0LA',
    });
     console.log(req.body);
-    res.status(200).json(flights.flights);
+    res.status(200).json(flights.flight);
     // res.status(200).json(flights);
     // amadeus.shopping.flightOffersSearch.get({
     //         originLocationCode: 'DEL',

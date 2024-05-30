@@ -32,7 +32,7 @@ const FlightCard = ({flight,dictionaries}) => {
             <span className="text-[14px] cursor-default text-[#666] pl-8">{duration}</span>
             <span className="pl-8 cursor-default text-xs text-[#007bff]"> {numberOfStops==0?"Non Stop":(numberOfStops+' Stop')} </span>
           </div>
-
+          
           <div className="w-60 flex flex-col">
             <span className="arrival cursor-default pl-8">{arrival.at.split('T')[1].substring(0,5)}</span>
             <span className='pl-8'>{arrival.iataCode}</span>

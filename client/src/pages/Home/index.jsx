@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './home.css';
 import axios from 'axios';
 
 
-const Home = ({SERVER_URL}) => {
+const Home = ({ SERVER_URL, auth }) => {
   const [flights, setFlights] = useState([]);
   const [loading, setLoading] = useState(false);
-  const navigate=useNavigate();
-  const searchFlights = async(e) => {
+  const navigate = useNavigate();
+  const searchFlights = async (e) => {
     e.preventDefault();
     const formData = {
       tripType: e.target.form.tripType.value,
@@ -20,21 +20,30 @@ const Home = ({SERVER_URL}) => {
     };
     console.log(formData);
     setLoading(true);
-    console.log(SERVER_URL+'/search-flights')
-    const response=await axios.post(SERVER_URL+'/search-flights', formData)
+    console.log(SERVER_URL + '/search-flights')
+    const response = await axios.post(SERVER_URL + '/search-flights', formData)
     console.log(response);
-    if(response.status==200){
+    if (response.status == 200) {
       setLoading(false);
       navigate('/search', { state: { flights: response.data } });
     }
-     
+
   };
+
+
 
   return (
     <div className="App">
       <header className="header">
         <h1>SkyTrip</h1>
-        <Link to='/login' className="login-button my-auto text-center">Login</Link>
+
+        <div className='login-button my-auto text-center'>
+
+          {
+            auth ? <Link to='/profile' >Profile </Link> : <Link to='/login' >Login </Link>
+          }
+
+        </div>
       </header>
       <div className="flight-search-container">
         <div className="form-container">
@@ -49,7 +58,7 @@ const Home = ({SERVER_URL}) => {
             </div>
             <div className="input-field">
               <label htmlFor="from">From:</label>
-              <input type="text" id="from" placeholder="NYC" name='from' />
+              <input type="text" id="from" placeholder="NYC"  name='from' />
             </div>
             <div className="input-field">
               <label htmlFor="to">To:</label>
@@ -71,7 +80,7 @@ const Home = ({SERVER_URL}) => {
                 <option value="first">First</option>
               </select>
             </div>
-            <button  onClick={searchFlights} className='h-8'>{loading?"Searching...":'Search'}</button>
+            <button onClick={searchFlights} className='h-8'>{loading ? "Searching..." : 'Search'}</button>
           </form>
         </div>
       </div>

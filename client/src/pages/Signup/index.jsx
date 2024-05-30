@@ -9,7 +9,7 @@ import passimg from "../../assets/password.png";
 
 import './signup.css'
 
-function Signup({ SERVER_URL }) {
+function Signup({ SERVER_URL,handleStateChange }) {
     const navigate = useNavigate();
     const handleSignUpSubmit = async (e) => {
         e.preventDefault();
@@ -41,6 +41,7 @@ function Signup({ SERVER_URL }) {
                         localStorage.setItem('accessToken', response.data.token);
                         localStorage.setItem('userId', response.data.newUser._id);
                         toast.success("Registration successfull",{className: 'single-line-toast'});
+                        handleStateChange(localStorage.getItem('accessToken'),true);
                         navigate("/");
                     }
                     else {
