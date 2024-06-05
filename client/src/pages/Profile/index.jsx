@@ -6,7 +6,7 @@ import avatar from '../../assets/avatar.jpeg'
 import { toast } from 'react-toastify';
 import FlightCard from "../../components/FlightCard.jsx"
 
-const Profile = ({ SERVER_URL,handleStateChange }) => {
+const Profile = ({ SERVER_URL, handleStateChange }) => {
   const [isEditing, setIsEditing] = useState(false);
 
   const [profileInfo, setProfileInfo] = useState({
@@ -14,7 +14,7 @@ const Profile = ({ SERVER_URL,handleStateChange }) => {
     birthday: '9/4/2003',
     gender: 'Male',
     maritalStatus: 'Single',
-    address: 'VIDHYAVATI COLLEDGE KE SAMANE',
+    address: 'VIDHYAVATI COLLEDGE ',
     pincode: '477001',
     state: 'Madhya Pradesh',
   });
@@ -110,14 +110,14 @@ const Profile = ({ SERVER_URL,handleStateChange }) => {
   const handleLogoutClick = async () => {
     localStorage.removeItem('accessToken');
     localStorage.removeItem('userId');
-    handleStateChange(null,false);
+    handleStateChange(null, false);
     navigate('/');
   }
 
   return (
     <div>
       <div className="flex flex-col justify-center items-center w-4/5 mx-auto">
-        <div className="left">
+        {/* <div className="left">
           <div className="flex flex-col justify-center items-center m-4">
             <img src={avatar} alt="" className='bg-green-400 w-36 h-36 rounded-lg' />
             <p>{profileInfo.name}</p>
@@ -131,10 +131,10 @@ const Profile = ({ SERVER_URL,handleStateChange }) => {
             <p className='nav-link flex' onClick={navActiveLinkHandle}>Ticket history</p>
             <p className='nav-link flex' onClick={handleLogoutClick}>Logout</p>
           </div>
-        </div>
+        </div> */}
         <div className="right">
           <div className="profile-info">
-            <h3 className='text-[2rem]'>Profile</h3>
+            <h3 className='text-[2rem]'>My Profile</h3>
             {isEditing ? (
               <div className="profile-form">
                 <div className="profile-detail">
@@ -210,6 +210,13 @@ const Profile = ({ SERVER_URL,handleStateChange }) => {
               </div>
             )}
           </div>
+        </div>
+        <div className="right">
+          <div className="bg-white p-5 rounded-[5px] ">
+            <h3 className='text-[2rem]'>Previous Ticket</h3>
+            <div className=' w-[90%] h-96'></div>
+          </div>
+          <div className='flex w-[90%] h-[400px]'></div>
         </div>
       </div>
       <div className="flex flex-col w-2/3 ml-[200px]">

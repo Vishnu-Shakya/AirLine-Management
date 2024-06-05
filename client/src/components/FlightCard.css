@@ -2,8 +2,11 @@
   border: 1px solid #ddd;
   border-radius: 8px;
   overflow: hidden;
-  width: 65vw;
-  margin: 20px;
+  width: 85%;
+  margin-left:auto ;
+  margin-right:auto ;
+  margin-top: 20px;
+
   margin-top: 1px;
   font-family: Arial, sans-serif;
   background-color: #fff;

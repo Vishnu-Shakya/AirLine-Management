@@ -8,7 +8,7 @@
   }
   
   .left {
-    width: 25%;
+    width: 75%;
     padding: 20px;
     text-align: center;
     background: white;
@@ -16,7 +16,7 @@
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   .right {
     width: 75%;
     padding: 20px;

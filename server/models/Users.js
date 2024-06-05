@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
 const { profile } = require("../controllers/signup");
 
-
 const UserSchema = new mongoose.Schema({
     name: {
         type: String,
@@ -44,16 +43,18 @@ const UserSchema = new mongoose.Schema({
     },
     bookedTicket: [
         {
-            ticketId: {
-                type: String,
-            }
+            flightId: String,
+            departureDate: String,
+            returnDate: String,
+            passengers: Number
         }
     ],
     ticketHistory: [
         {
-            ticketId: {
-                type: String,
-            }
+            flightId: String,
+            departureDate: String,
+            returnDate: String,
+            passengers: Number
         }
     ]
 });

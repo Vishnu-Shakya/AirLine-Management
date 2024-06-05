@@ -27,7 +27,6 @@ function App() {
     const fetchData = async () => {
       try {
         const formData = { token };
-
         const response = await axios.post(SERVER_URL + '/auth', formData);
         if (response.status === 200) {
           setAuth(true);
@@ -56,7 +55,7 @@ function App() {
           </Route>
           <Route path="/signup" element={<Signup SERVER_URL={SERVER_URL}  handleStateChange={handleStateChange} />} />
 
-          <Route path='/search' element={<Search />} />
+          <Route path='/search' element={<Search SERVER_URL={SERVER_URL} token={token} />} />
 
           <Route path="/login" element={<Login SERVER_URL={SERVER_URL}  handleStateChange={handleStateChange} />} />
   
