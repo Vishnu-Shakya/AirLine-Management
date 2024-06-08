@@ -131,7 +131,7 @@ const Home = ({ SERVER_URL, auth }) => {
                         e.city.toLowerCase();
                       return toki.includes(gin) || toki2.includes(gin);
                     })
-                    .slice(0, 3)
+                    .slice(0, 5)
                     .map((e) => (
                       <li
                         className="s-o-l"
