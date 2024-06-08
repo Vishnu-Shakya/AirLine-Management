@@ -2,20 +2,28 @@
 body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f5f5f5; }
 
 * { box-sizing: border-box; }
+.App {
+  /* Specify the URL of the new background image */
+  background-image: url('https://m.media-amazon.com/images/I/617YmXVHk2L._SL1500_.jpg'); 
 
+  /* Adjust background properties as needed */
+  background-size: cover; /* Cover the entire viewport */
+  background-position: center; /* Center the background image */
+  background-repeat: no-repeat; /* Do not repeat the background image */
+}
 .flight-search-container {
   display: flex;
   justify-content:center;
   align-items: center;
-  height: calc(100vh - 60px); /* Adjust height to account for the header */
-  margin-top: 60px; /* Adjust margin to account for the header */
-  background-image: url('../../assets/home-bg.jpg'); /* Placeholder image, replace with your desired image URL */
+  height: calc(100vh); /* Adjust height to account for the header */
+  /* Adjust margin to account for the header */
+  /* Placeholder image, replace with your desired image URL */
   background-size: cover;
   background-position: center;
 }
 
 .form-container {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.95);
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -24,8 +32,9 @@ body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; background-c
   width: 30%;
 }
 
-h1 {
-  margin-bottom: 20px;
+.form-container h1{
+  padding-bottom: 40px;
+  font-size: 30px;
 }
 
 .radio-buttons {
@@ -50,7 +59,7 @@ h1 {
 
 .input-field input,
 .input-field select {
-  width: calc(100% - 20px);
+  width: calc(100%);
   padding: 8px 10px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -70,29 +79,16 @@ button:hover {
   background: #0056b3;
 }
 
-.header {
+
+.buttons{
   display: flex;
-  justify-content:space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background: rgba(255, 255, 255, 0.9);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  position: absolute;
-  top: 0;
-  width: 100%;
+  gap:2%;
 }
-.header h1 {
-  flex: 10;
-  margin: 0;
-  text-align: left;
-  font-family: Arial, sans-serif;
-  font-weight: bold; /* Make the logo bold */
-  font-size: 40px;
-}
+
 
 
 .login-button {
-  flex: 1;
+  
   padding: 10px 20px;
   background: #007bff;
   color: white;

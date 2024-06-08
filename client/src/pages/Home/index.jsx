@@ -38,9 +38,9 @@ const Home = ({ SERVER_URL, auth }) => {
       }
     };
 
-    document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
 
@@ -87,25 +87,18 @@ const Home = ({ SERVER_URL, auth }) => {
 
   return (
     <div className="App">
-      <header className="header">
-        <h1>SkyTrip</h1>
-        <div className="login-button my-auto text-center">
-          {auth ? (
-            <Link to="/profile">Profile </Link>
-          ) : (
-            <Link to="/login">Login </Link>
-          )}
-        </div>
-      </header>
       <div className="flight-search-container">
         <div className="form-container">
+          <h1>SkyTrip</h1>
+
           <form>
             <div className="radio-buttons">
               <label>
                 <input type="radio" name="tripType" value="one-way" /> One-way
               </label>
               <label>
-                <input type="radio" name="tripType" value="round-trip" /> Round-trip
+                <input type="radio" name="tripType" value="round-trip" />{" "}
+                Round-trip
               </label>
             </div>
             <div className="input-field" ref={inputRef1}>
@@ -130,13 +123,13 @@ const Home = ({ SERVER_URL, auth }) => {
                         e.name.toLowerCase() +
                         " " +
                         e.city.toLowerCase();
-                      const toki2 = 
-                      e.code.toLowerCase() +
-                      "-" +
-                      e.name.toLowerCase() +
-                      "-" +
-                      e.city.toLowerCase();
-                      return (toki.includes(gin) || toki2.includes(gin));
+                      const toki2 =
+                        e.code.toLowerCase() +
+                        "-" +
+                        e.name.toLowerCase() +
+                        "-" +
+                        e.city.toLowerCase();
+                      return toki.includes(gin) || toki2.includes(gin);
                     })
                     .slice(0, 3)
                     .map((e) => (
@@ -177,13 +170,13 @@ const Home = ({ SERVER_URL, auth }) => {
                         e.name.toLowerCase() +
                         " " +
                         e.city.toLowerCase();
-                      const toki2 = 
-                      e.code.toLowerCase() +
-                      "-" +
-                      e.name.toLowerCase() +
-                      "-" +
-                      e.city.toLowerCase();
-                      return (toki.includes(gin) || toki2.includes(gin));
+                      const toki2 =
+                        e.code.toLowerCase() +
+                        "-" +
+                        e.name.toLowerCase() +
+                        "-" +
+                        e.city.toLowerCase();
+                      return toki.includes(gin) || toki2.includes(gin);
                     })
                     .slice(0, 5)
                     .map((e) => (
@@ -218,9 +211,20 @@ const Home = ({ SERVER_URL, auth }) => {
                 <option value="first">First</option>
               </select>
             </div>
-            <button onClick={searchFlights} className="h-8">
+            <div className="buttons">
+            <button onClick={searchFlights} className="login-button my-auto text-center">
               {loading ? "Searching..." : "Search"}
+              
             </button>
+            <div className="login-button my-auto text-center">
+                {auth ? (
+                  <Link to="/profile">Profile </Link>
+                ) : (
+                  <Link to="/login">Login </Link>
+                )}
+              </div>
+            </div>
+            
           </form>
         </div>
       </div>
