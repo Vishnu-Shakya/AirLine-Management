@@ -110,3 +110,30 @@ button:hover {
     margin: auto;
    }
 }
+.search-options{
+position: absolute;  
+  width:20%;
+  
+  overflow-y: auto;
+  border:solid 2px black;
+  
+  background-color: green;
+}
+
+
+.input-field{
+  border:solid 2px black;
+  
+}
+
+li{
+  border:solid 2px black
+}
+
+
+
+.s-o-l{
+  text-align: left;
+  list-style-type: none;
+  padding :0px 10px;  
+}
