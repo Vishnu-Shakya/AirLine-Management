@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./home.css";
 import axios from "axios";
@@ -12,42 +12,44 @@ const Home = ({ SERVER_URL, auth }) => {
   const [value2, setValue2] = useState("");
   const [searchVisible, setSearchVisible] = useState(false);
   const [searchVisible2, setSearchVisible2] = useState(false);
-  const [searchVisible3, setSearchVisible3] = useState(false);
-  const [searchVisible4, setSearchVisible4] = useState(false);
-  const handlefocus = () => {
+
+  const inputRef1 = useRef(null);
+  const inputRef2 = useRef(null);
+  const suggestionRef1 = useRef(null);
+  const suggestionRef2 = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        inputRef1.current &&
+        !inputRef1.current.contains(event.target) &&
+        suggestionRef1.current &&
+        !suggestionRef1.current.contains(event.target)
+      ) {
+        setSearchVisible(false);
+      }
+      if (
+        inputRef2.current &&
+        !inputRef2.current.contains(event.target) &&
+        suggestionRef2.current &&
+        !suggestionRef2.current.contains(event.target)
+      ) {
+        setSearchVisible2(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  const handleFocus1 = () => {
     setSearchVisible(true);
+  };
+
+  const handleFocus2 = () => {
     setSearchVisible2(true);
-    
-    
-  };
-  
-
-  const handlenofocus = () => {
-    
-    setSearchVisible(false);
-     
-  };
-
-  const handlenofocus2 = () => {
-    
-    setSearchVisible2(false);
-     
-  };
-
- 
-
-  const handlefocus3 = () => {
-    setSearchVisible3(true);
-    setSearchVisible4(true);
-    
-  };
-  
-
-  const handlenofocus3 = () => {
-        
-        setSearchVisible3(false);
-        setSearchVisible4(false);
-    
   };
 
   const changeVal = (e) => {
@@ -57,11 +59,11 @@ const Home = ({ SERVER_URL, auth }) => {
 
   const changeVal2 = (e) => {
     setValue2(e.target.value);
-    setSearchVisible3(true);
+    setSearchVisible2(true);
   };
 
-  console.log(searchVisible + " " +searchVisible2);
   const navigate = useNavigate();
+
   const searchFlights = async (e) => {
     e.preventDefault();
     const formData = {
@@ -77,7 +79,7 @@ const Home = ({ SERVER_URL, auth }) => {
     console.log(SERVER_URL + "/search-flights");
     const response = await axios.post(SERVER_URL + "/search-flights", formData);
     console.log(response);
-    if (response.status == 200) {
+    if (response.status === 200) {
       setLoading(false);
       navigate("/search", { state: { flights: response.data } });
     }
@@ -87,7 +89,6 @@ const Home = ({ SERVER_URL, auth }) => {
     <div className="App">
       <header className="header">
         <h1>SkyTrip</h1>
-
         <div className="login-button my-auto text-center">
           {auth ? (
             <Link to="/profile">Profile </Link>
@@ -104,24 +105,22 @@ const Home = ({ SERVER_URL, auth }) => {
                 <input type="radio" name="tripType" value="one-way" /> One-way
               </label>
               <label>
-                <input type="radio" name="tripType" value="round-trip" />{" "}
-                Round-trip
+                <input type="radio" name="tripType" value="round-trip" /> Round-trip
               </label>
             </div>
-            <div className="input-field"  onFocus={handlefocus} onBlur={handlenofocus}>
+            <div className="input-field" ref={inputRef1}>
               <label htmlFor="from">From:</label>
               <input
                 type="text"
                 id="from"
                 placeholder="JFK"
                 value={value}
+                onFocus={handleFocus1}
                 onChange={changeVal}
                 name="from"
               />
-            
-              </div>
-                <div className="search-options"   onBlur={() => {setSearchVisible2(false)}}
-                 style = {{visibility:(searchVisible2)?"visible":"hidden"}}>
+              {searchVisible && (
+                <ul className="search-options" ref={suggestionRef1}>
                   {airportdata
                     .filter((e) => {
                       const gin = value.toLowerCase();
@@ -137,74 +136,72 @@ const Home = ({ SERVER_URL, auth }) => {
                       e.name.toLowerCase() +
                       "-" +
                       e.city.toLowerCase();
-                      return (toki.includes(gin)||toki2.includes(gin));
+                      return (toki.includes(gin) || toki2.includes(gin));
                     })
                     .slice(0, 3)
                     .map((e) => (
                       <li
                         className="s-o-l"
                         key={e.code}
-                        onClick={() =>
-                          {setValue(e.code + "-" + e.name + "-" + e.city);
-                          setSearchVisible(false)
-                          setSearchVisible2(false);}
-                        }
-                        
-                        
+                        onClick={() => {
+                          setValue(e.code + "-" + e.name + "-" + e.city);
+                          setSearchVisible(false);
+                        }}
                       >
                         {e.code + "-" + e.name + "-" + e.city}
                       </li>
                     ))}
-                </div>
-              
-            
-            <div className="input-field" onFocus={handlefocus3} >
+                </ul>
+              )}
+            </div>
+
+            <div className="input-field" ref={inputRef2}>
               <label htmlFor="to">To:</label>
               <input
                 type="text"
                 id="to"
                 placeholder="LAX"
-                onFocus={handlefocus3}
                 value={value2}
+                onFocus={handleFocus2}
                 onChange={changeVal2}
                 name="to"
               />
-            
-            
-              <div className="search-options"
-              style = {{visibility:(searchVisible3||searchVisible4)?"visible":"hidden"}}>
-                {airportdata
-                  .filter((e) => {
-                    const gin = value2.toLowerCase();
-                    const toki =
+              {searchVisible2 && (
+                <ul className="search-options" ref={suggestionRef2}>
+                  {airportdata
+                    .filter((e) => {
+                      const gin = value2.toLowerCase();
+                      const toki =
+                        e.code.toLowerCase() +
+                        " " +
+                        e.name.toLowerCase() +
+                        " " +
+                        e.city.toLowerCase();
+                      const toki2 = 
                       e.code.toLowerCase() +
-                      " " +
+                      "-" +
                       e.name.toLowerCase() +
-                      " " +
+                      "-" +
                       e.city.toLowerCase();
-                    const toki2 = 
-                    e.code.toLowerCase() +
-                    "-" +
-                    e.name.toLowerCase() +
-                    "-" +
-                    e.city.toLowerCase();
-                    return (toki.includes(gin)||toki2.includes(gin));
-                  })
-                  .slice(0, 5)
-                  .map((e) => (
-                    <li
-                      className="s-o-l"
-                      key={e.code}
-                      onClick={() =>
-                        {setValue2(e.code + "-" + e.name + "-" + e.city);
-                          handlenofocus3();}
-                      }
-                    >
-                      {e.code + "-" + e.name + "-" + e.city}
-                    </li>
-                  ))}
-              </div>
-              </div>
+                      return (toki.includes(gin) || toki2.includes(gin));
+                    })
+                    .slice(0, 5)
+                    .map((e) => (
+                      <li
+                        className="s-o-l"
+                        key={e.code}
+                        onClick={() => {
+                          setValue2(e.code + "-" + e.name + "-" + e.city);
+                          setSearchVisible2(false);
+                        }}
+                      >
+                        {e.code + "-" + e.name + "-" + e.city}
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </div>
+
             <div className="input-field">
               <label htmlFor="departure">Departure:</label>
               <input type="date" id="departure" name="departure" />

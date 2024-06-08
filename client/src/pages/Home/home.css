@@ -5,7 +5,7 @@ body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; background-c
 
 .flight-search-container {
   display: flex;
-  justify-content:flex-start;
+  justify-content:center;
   align-items: center;
   height: calc(100vh - 60px); /* Adjust height to account for the header */
   margin-top: 60px; /* Adjust margin to account for the header */
@@ -20,8 +20,8 @@ body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; background-c
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   text-align: center;
-  max-width: 400px;
-  width: 95%;
+  min-width: 300px;
+  width: 30%;
 }
 
 h1 {
@@ -112,22 +112,22 @@ button:hover {
 }
 .search-options{
 position: absolute;  
-  width:20%;
+min-width: 240px;
+width:26%;
   
   overflow-y: auto;
-  border:solid 2px black;
   
-  background-color: green;
+  
+  background-color: white;
+}
+
+ul{
+  border: 1px black solid;
 }
 
 
-.input-field{
-  border:solid 2px black;
-  
-}
-
-li{
-  border:solid 2px black
+li:hover{
+  background-color:#ccc;
 }
 
 
