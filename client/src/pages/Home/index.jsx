@@ -120,7 +120,7 @@ const Home = ({ SERVER_URL, auth }) => {
               />
             
               </div>
-                <div className="search-options"  onFocus={handlefocus}  onBlur={handlenofocus2}
+                <div className="search-options"   onBlur={() => {setSearchVisible2(false)}}
                  style = {{visibility:(searchVisible2)?"visible":"hidden"}}>
                   {airportdata
                     .filter((e) => {
