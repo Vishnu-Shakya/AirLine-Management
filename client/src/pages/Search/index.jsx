@@ -131,6 +131,37 @@ function Search({ SERVER_URL, token }) {
     document.getElementById("roundtrip").style.color = "white";
   };
 
+  const sshow = () => {
+    var x = document.getElementById("oneway");
+    var y = document.getElementById("roundtrip");
+    document.getElementById("oneway").style.background = "white";
+    x.addEventListener("mouseenter", function( event ) {   
+      event.target.style.background = "rgb(2, 60, 148)";
+      event.target.style.color = "white";
+    }, false);
+    x.addEventListener("mouseleave", function( event ) {   
+      event.target.style.background = "white";
+      event.target.style.color = "#007bff";
+      
+    }, false);
+    y.addEventListener("mouseenter", function( event ) {   
+      event.target.style.background = "rgb(2, 60, 148)";
+      event.target.style.color = "white";
+    }, false);
+    y.addEventListener("mouseleave", function( event ) {   
+      event.target.style.background = "white";
+      event.target.style.color = "#007bff";
+      
+    }, false);
+    document.getElementById("oneway").style.color = "#007bff";
+    document.getElementById("oneway").style.border = "1px #007bff solid";
+    
+    document.getElementById("roundtrip").style.background = "white";
+
+    document.getElementById("roundtrip").style.color = "#007bff";
+    document.getElementById("roundtrip").style.border = "1px #007bff solid";
+  };
+
   console.log(token);
   return (
     <div className="searchpage">
@@ -143,9 +174,12 @@ function Search({ SERVER_URL, token }) {
             <div id="roundtrip" onClick={rtshow}>
               <span>Round-Trip</span>
             </div>
+            <div id="searchbutton" onClick={sshow}>
+              <span>Search</span>
+            </div>
           </div>
           <div id="searchactive">
-            <div className="search-input-field" ref={inputRef1}>
+            <div className="search-input-field searchfirst" ref={inputRef1}>
               <label htmlFor="search-from">From:</label>
               <input
                 type="text"
@@ -192,7 +226,7 @@ function Search({ SERVER_URL, token }) {
               )}
             </div>
 
-            <div className="search-input-field" ref={inputRef2}>
+            <div className="search-input-field searchsecond" ref={inputRef2}>
               <label htmlFor="search-to">To:</label>
               <input
                 type="text"
@@ -247,8 +281,8 @@ function Search({ SERVER_URL, token }) {
               <label htmlFor="search-return">Return:</label>
               <input type="date" id="search-return" name="return" />
             </div>
-            <div className="search-input-field">
-              <label htmlFor="search-class">Class:</label>
+            <div className="search-input-field searchbuttonthree">
+              <label htmlFor="search-class ">Class:</label>
               <select id="search-class" name="class">
                 <option value="economy">Economy</option>
                 <option value="business">Business</option>
