@@ -1,16 +1,4 @@
-/* src/FlightSearch.css */
-body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f5f5f5; }
 
-* { box-sizing: border-box; }
-.App {
-  /* Specify the URL of the new background image */
-  background-image: url('https://m.media-amazon.com/images/I/617YmXVHk2L._SL1500_.jpg'); 
-
-  /* Adjust background properties as needed */
-  background-size: cover; /* Cover the entire viewport */
-  background-position: center; /* Center the background image */
-  background-repeat: no-repeat; /* Do not repeat the background image */
-}
 .flight-search-container {
   display: flex;
   justify-content:center;

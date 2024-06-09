@@ -3,20 +3,18 @@ const { response } = require('express');
 const flights = require('../db/tempFlight.json')
 
 
-
-
 const searchFlight = async (req, res) => {
   const amadeus = new Amadeus({
     clientId: '25wwlbcrcfCHJ6iiKu7l9mXHJ9k1Ad64',
     clientSecret: 'hDaRKJRmsmNsD0LA',
   });
   console.log(req.body);
-  console.log(flights)
+  // console.log(flights)
   // res.status(200).json(flights.flights);
   amadeus.shopping.flightOffersSearch.get({
-    originLocationCode: 'DEL',
-    destinationLocationCode: 'BOM',
-    departureDate: '2024-07-03',
+    originLocationCode: req.body.from.split('-')[0],
+    destinationLocationCode: req.body.to.split('-')[0],
+    departureDate: req.body.departure,
     adults: '1',
     currencyCode: 'INR',
     max: 10
@@ -27,7 +25,6 @@ const searchFlight = async (req, res) => {
     console.error(error);
     res.status(500).send(error.message);
   });
-
 }
 const flightPricing = async (req, res) => {
   const amadeus = new Amadeus({
