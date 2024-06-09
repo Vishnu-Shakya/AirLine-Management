@@ -179,6 +179,7 @@ function Search({ SERVER_URL, token }) {
             </div>
           </div>
           <div id="searchactive" className="w-[80%] mx-auto">
+
             <div className="search-input-field searchfirst" ref={inputRef1}>
               <label htmlFor="search-from">From:</label>
               <input

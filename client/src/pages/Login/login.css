@@ -53,14 +53,19 @@
 }
 .login-form-group img{
   margin : 0 4%;
+  width:auto;
+  height:auto;
 }
 
 
 .login-remember-me {
   display: flex;
-  align-items: self-end;
+  align-items: end;
+  text-align: end;
   
 }
+
+
 
 .login-button {
   width: 100%;
