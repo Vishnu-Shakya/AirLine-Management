@@ -26,3 +26,21 @@ const start = async () => {
 }
 
 start();
+
+// var Amadeus = require("amadeus");
+// var amadeus = new Amadeus({
+//   clientId: '25wwlbcrcfCHJ6iiKu7l9mXHJ9k1Ad64',
+//   clientSecret: 'hDaRKJRmsmNsD0LA'
+// });
+
+// // Which cities or airports start with ’r'?
+// amadeus.referenceData.locations.get({
+//     keyword:'MUMBAI',
+//     subType: Amadeus.location.airport // To get only airports
+//   }).then(function (response) {
+//     console.log(response.data[0]
+        
+//     );
+//   }).catch(function (error) {
+//     console.error(error);
+//   });

@@ -1,0 +1,78 @@
+.signup-bg {
+  width: 100vw;
+  height: 100vh;
+}
+.signup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  /* background-image: url('https://source.unsplash.com/random/900x700/?airoplane'); */
+  background-image: url('https://images.unsplash.com/photo-1529074963764-98f45c47344b?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8YWVyb3BsYW5lfGVufDB8fDB8fHww');
+  background-size: cover; /* Ensure the image covers the entire element */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent the image from repeating */
+}
+
+.signup-form {
+  background-color: #ffffff;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 35%;
+  max-width:400px;
+  min-width: 300px;
+}
+
+.signup-form h2 {
+  margin-bottom: 1.5rem;
+  color: #333;
+  font-size: 1.6rem;
+}
+
+.form-group {
+  display:flex;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  background-color: #eaeaea;
+}
+
+.form-group input{
+  height: 50px;
+  width:75%;
+  background: transparent;
+  border:none;
+  outline: none;
+  color:#797979;
+  font-size: 16px;
+
+
+}
+.form-group img{
+  margin : 0 4%;
+}
+
+.signup-button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: #1679AB;
+  color: #ffffff;
+  font-size: 1rem;
+  margin-top:1.5rem;
+  cursor: pointer;
+  
+}
+
+.signup-button:hover {
+  background-color: #1D5D9B;
+}
+
+.remember-me {
+  display: flex;
+  align-items: self-end;
+  
+}
