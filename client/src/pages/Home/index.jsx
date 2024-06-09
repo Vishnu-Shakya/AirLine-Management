@@ -47,144 +47,20 @@ const Home = ({ SERVER_URL, auth }) => {
             returnDateInput.value = e.target.value;
         }
     };
+
     const handleFocus1 = () => {
         setSearchVisible(true);
-
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-
     };
 
     const handleFocus2 = () => {
         setSearchVisible2(true);
     };
 
-
     const changeVal = (e) => {
         setValue(e.target.value);
         setSearchVisible(true);
     };
-    console.log(formData);
-    setLoading(true);
-    console.log(SERVER_URL + "/search-flights");
-    const response = await axios.post(SERVER_URL + "/search-flights", formData);
-    console.log(response);
-    if (response.status === 200) {
-      setLoading(false);
-      navigate("/search", { state: { flights: response.data } });
-    }
-  };
 
-  return (
-    <div className="App">
-      <div className="flight-search-container">
-        <div className="form-container">
-          <h1>SkyTrip</h1>
-
-          <form>
-            <div className="radio-buttons">
-              <label>
-                <input type="radio" name="tripType" value="one-way" /> One-way
-              </label>
-              <label>
-                <input type="radio" name="tripType" value="round-trip" />{" "}
-                Round-trip
-              </label>
-            </div>
-            <div className="input-field" ref={inputRef1}>
-              <label htmlFor="from">From:</label>
-              <input
-                type="text"
-                id="from"
-                placeholder="JFK"
-                value={value}
-                onFocus={handleFocus1}
-                onChange={changeVal}
-                name="from"
-              />
-              {searchVisible && (
-                <ul className="search-options" ref={suggestionRef1}>
-                  {airportdata
-                    .filter((e) => {
-                      const gin = value.toLowerCase();
-                      const toki =
-                        e.code.toLowerCase() +
-                        " " +
-                        e.name.toLowerCase() +
-                        " " +
-                        e.city.toLowerCase();
-                      const toki2 =
-                        e.code.toLowerCase() +
-                        "-" +
-                        e.name.toLowerCase() +
-                        "-" +
-                        e.city.toLowerCase();
-                      return toki.includes(gin) || toki2.includes(gin);
-                    })
-                    .slice(0, 5)
-                    .map((e) => (
-                      <li
-                        className="s-o-l"
-                        key={e.code}
-                        onClick={() => {
-                          setValue(e.code + "-" + e.name + "-" + e.city);
-                          setSearchVisible(false);
-                        }}
-                      >
-                        {e.code + "-" + e.name + "-" + e.city}
-                      </li>
-                    ))}
-                </ul>
-              )}
-            </div>
-
-            <div className="input-field" ref={inputRef2}>
-              <label htmlFor="to">To:</label>
-              <input
-                type="text"
-                id="to"
-                placeholder="LAX"
-                value={value2}
-                onFocus={handleFocus2}
-                onChange={changeVal2}
-                name="to"
-              />
-              {searchVisible2 && (
-                <ul className="search-options" ref={suggestionRef2}>
-                  {airportdata
-                    .filter((e) => {
-                      const gin = value2.toLowerCase();
-                      const toki =
-                        e.code.toLowerCase() +
-                        " " +
-                        e.name.toLowerCase() +
-                        " " +
-                        e.city.toLowerCase();
-                      const toki2 =
-                        e.code.toLowerCase() +
-                        "-" +
-                        e.name.toLowerCase() +
-                        "-" +
-                        e.city.toLowerCase();
-                      return toki.includes(gin) || toki2.includes(gin);
-                    })
-                    .slice(0, 5)
-                    .map((e) => (
-                      <li
-                        className="s-o-l"
-                        key={e.code}
-                        onClick={() => {
-                          setValue2(e.code + "-" + e.name + "-" + e.city);
-                          setSearchVisible2(false);
-                        }}
-                      >
-                        {e.code + "-" + e.name + "-" + e.city}
-                      </li>
-                    ))}
-                </ul>
-              )}
-            </div>
     const changeVal2 = (e) => {
         setValue2(e.target.value);
         setSearchVisible2(true);
@@ -327,23 +203,6 @@ const Home = ({ SERVER_URL, auth }) => {
                     </form>
                 </div>
             </div>
-
-
-            <div className="buttons">
-            <button onClick={searchFlights} className="login-button my-auto text-center">
-              {loading ? "Searching..." : "Search"}
-              
-            </button>
-            <div className="login-button my-auto text-center">
-                {auth ? (
-                  <Link to="/profile">Profile </Link>
-                ) : (
-                  <Link to="/login">Login </Link>
-                )}
-              </div>
-            </div>
-            
-          </form>
         </div>
     );
 };
