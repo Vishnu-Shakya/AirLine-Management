@@ -18,6 +18,9 @@ body, html { margin: 0; padding: 0; font-family: Arial, sans-serif; background-c
   height: calc(100vh); /* Adjust height to account for the header */
   /* Adjust margin to account for the header */
   /* Placeholder image, replace with your desired image URL */
+/*   height: calc(100vh - 60px); /* Adjust height to account for the header */
+  margin-top: 60px; /* Adjust margin to account for the header */
+  background-image: url('../../assets/home1.jpeg'); /* Placeholder image, replace with your desired image URL */ */
   background-size: cover;
   background-position: center;
 }
