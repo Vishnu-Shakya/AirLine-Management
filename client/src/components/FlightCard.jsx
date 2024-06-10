@@ -1,5 +1,6 @@
 import React ,{useState} from 'react';
 import axios from 'axios';
+import {toast} from 'react-toastify';
 import airlines from '../assets/airlines'
 
 import './FlightCard.css';
@@ -11,10 +12,10 @@ const FlightCard = ({ flight, dictionaries, SERVER_URL }) => {
   const { departure, arrival, numberOfStops } = segments[0];
   const aircraftCode  = flight.validatingAirlineCodes[0];
   const aircraftName = airlines[aircraftCode].name.split(" ")[0]+" "+airlines[aircraftCode].name.split(" ")[1];
-  // console.log(dictionaries.aircraft[flight.itineraries[0].segments[0].aircraft.code]);
   console.log(airlines['AI'].name)
 
   const [showModal, setShowModal] = useState(false);
+  const [flightDetail,setFlightDetail]=useState(null);
   const openModal = () => {
     setShowModal(true);
   };
@@ -24,15 +25,19 @@ const FlightCard = ({ flight, dictionaries, SERVER_URL }) => {
   };
   const handleViewPrice = async (e) => {
     e.preventDefault();
-    console.log(flight);
-    
+    console.log(SERVER_URL + '/pricing\n','fomData:',FormData);
     const response = await axios.post(SERVER_URL + '/pricing', flight);
-    console.log(response);
-    openModal();
+    console.log("response:",response.data.data);
 
-  }
-  const handleBookTicket = (e) => {
-    e.preventDefault();
+    if(response.status==200){
+      setFlightDetail(response.data.data);
+      openModal();
+    }
+    else{
+        toast.error('server down !!');
+    }
+    
+    
 
   }
   return (
@@ -66,7 +71,7 @@ const FlightCard = ({ flight, dictionaries, SERVER_URL }) => {
         <div className="price flex flex-col">
           <span className='text-[#333] cursor-default'>{flight.price.base.substring(0, flight.price.base.length - 3)} {flight.price.currency}</span>
           <button className="bg-[#007bff] text-[.9rem]  text-[#fff] border-0 border-r-4 px-4 py-2 mt-2 cursor-pointer" onClick={handleViewPrice}>VIEW PRICES</button>
-          <Modal show={showModal} onClose={closeModal} flight={flight} SERVER_URL={SERVER_URL}>
+          <Modal show={showModal} onClose={closeModal} flightOffer={flightDetail} flight={flight} SERVER_URL={SERVER_URL}>
             <p>This is the modal content!</p>
           </Modal>
         </div>

@@ -1,60 +1,72 @@
-const Amadeus = require('amadeus');
-const { response } = require('express');
-const flights = require('../db/tempFlight.json')
-
+const Amadeus = require("amadeus");
+const { response } = require("express");
+const flights = require("../db/tempFlight.json");
+const amadeus = new Amadeus({
+    clientId: "26bsRbwMQleZbDNkhSUFtIYZaTcnAB9V",
+    clientSecret: "2QhXPz0alULAUn8v",
+});
 
 const searchFlight = async (req, res) => {
-  const amadeus = new Amadeus({
-    clientId: '25wwlbcrcfCHJ6iiKu7l9mXHJ9k1Ad64',
-    clientSecret: 'hDaRKJRmsmNsD0LA',
-  });
-  console.log(req.body);
-  // console.log(flights)
-  // res.status(200).json(flights.flights);
-  amadeus.shopping.flightOffersSearch.get({
-    originLocationCode: req.body.from.split('-')[0],
-    destinationLocationCode: req.body.to.split('-')[0],
-    departureDate: req.body.departure,
-    adults: '1',
-    currencyCode: 'INR',
-    max: 10
-  }).then(response => {
-    console.log(response)
-    res.status(200).json(response.result);
-  }).catch(error => {
-    console.error(error);
-    res.status(500).send(error.message);
-  });
-}
+
+    console.log(req.body);
+    amadeus.shopping.flightOffersSearch
+        .get({
+            originLocationCode: req.body.from.split("-")[0],
+            destinationLocationCode: req.body.to.split("-")[0],
+            departureDate: req.body.departure,
+            adults: "1",
+            currencyCode: "INR",
+            max: 10,
+        })
+        .then((response) => {
+            console.log(response);
+            res.status(200).json(response.result);
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send(error.message);
+        });
+};
 const flightPricing = async (req, res) => {
-  const amadeus = new Amadeus({
-    clientId: '25wwlbcrcfCHJ6iiKu7l9mXHJ9k1Ad64',
-    clientSecret: 'hDaRKJRmsmNsD0LA',
-  });
-  // console.log(req.body);
-  amadeus.booking.flightOrder('eJzTd9cPizQ2d7UEAAsmAj0%3D').get()
-    .then(function (response) {
-      console.log('Booking Details:', response.data);
+    amadeus.shopping.flightOffers.pricing
+        .post(
+            JSON.stringify({
+                data: {
+                    type: "flight-offers-pricing",
+                    flightOffers: [req.body],
+                },
+            })
+        )
+        .then((pricingResponse) => {
+            res.status(200).json(pricingResponse)
+        })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send(error.message);
+        });
+};
+const flightBooking = async (req, res) => {
+    console.log(req.body);
+    amadeus.booking.flightOrders.post(
+        JSON.stringify({
+            data: {
+                type: 'flight-order',
+                flightOffers: [req.body.flightOffers[0]],
+                travelers: req.body.travellers
+            }
+        })
+    ).then((response)=>{
+        console.log(response);
+        res.status(201).json(response);
     })
-    .catch(function (error) {
-      console.error('Error fetching booking details:', error);
-    });
-  amadeus.shopping.flightOffers.pricing.post(
-    JSON.stringify({
-      "data": {
-        "type": "flight-offers-pricing",
-        "flightOffers": [
-          req.body
-        ]
-      }
+    .catch((error)=>{
+        console.log(error);
+        res.status(500).json(error);
     })
-  ).then((pricingResponse) => {
-    // console.log(pricingResponse.result.data.flightOffers);
-    res.status(200).json(pricingResponse);
-  })
-}
+};
 
 module.exports = {
-  searchFlight,
-  flightPricing
+    searchFlight,
+    flightPricing,
+    flightBooking
 };

@@ -2,7 +2,7 @@ const express=require('express');
 const router = express.Router();
 
 const {signup,login,auth,profileUpdate,profileInfo}=require('../controllers/signup');
-const {searchFlight,flightPricing}=require('../controllers/flight')
+const {searchFlight,flightPricing,flightBooking}=require('../controllers/flight')
 
 router.route('/signup').post(signup);
 router.route('/login').post(login);
@@ -13,6 +13,7 @@ router.route('/profileUpdate').post(profileUpdate);
 // flight service api 
 router.route('/search-flights').post(searchFlight);
 router.route('/pricing').post(flightPricing);
+router.route('/booking').post(flightBooking);
 
 
 
