@@ -1,6 +1,8 @@
 const Amadeus = require("amadeus");
 const { response } = require("express");
 const flights = require("../db/tempFlight.json");
+const User = require('../models/Users.js');
+
 const amadeus = new Amadeus({
     clientId: "26bsRbwMQleZbDNkhSUFtIYZaTcnAB9V",
     clientSecret: "2QhXPz0alULAUn8v",
@@ -61,20 +63,19 @@ const flightBooking = async (req, res) => {
         try {
             // Find the user by id and update the bookedTicket array
             const updatedUser = await User.findByIdAndUpdate(
-                userId,
+                req.body.userId,
                 {
                     $push: {
                         bookedTicket: {
                             flightId: response.data.id,
-                            departureDate: departureDate,
-                            returnDate: returnDate,
-                            passengers: passengers
+                            departureDate: response.data.flightOffers[0].itineraries[0].segments[0].departure.at.split('T')[0],
+                            passengers: req.body.travellers.length
                         }
                     }
                 },
                 { new: true } // Return the updated document
             );
-    
+
             if (updatedUser) {
                 console.log("Booked ticket added successfully:", updatedUser);
             } else {
@@ -90,9 +91,34 @@ const flightBooking = async (req, res) => {
             res.status(500).json(error);
         })
 };
+const ticketInfo = async (req, res) => {
+    const bookedTickets = req.body;
+
+    try {
+        const resultPromises = bookedTickets.map(ticket =>
+            amadeus.booking.flightOrder(ticket.flightId).get()
+                .then(response => response.data)
+                .catch(error => {
+                    console.error('Error fetching booking details:', error);
+                    throw new Error(error.message);
+                })
+        );
+
+        const results = await Promise.all(resultPromises);
+
+        res.status(200).json(results);
+
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send(error.message);
+    }
+};
+
+
 
 module.exports = {
     searchFlight,
     flightPricing,
-    flightBooking
+    flightBooking,
+    ticketInfo
 };

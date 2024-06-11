@@ -295,10 +295,10 @@ function Search({ SERVER_URL, token }) {
       </div>
       <div className="flex justify-around pt-4 mx-auto">
         <div className="w-1/5 hidden lg:flex">
-          <Filters></Filters>
+          <Filters ></Filters>
         </div>
         <div className="w-[100%] lg:w-[67%]">
-          {flights.data.map((flight, index) => (
+          {flights.data.map((flight,index) => (
             <FlightCard
               key={index}
               flight={flight}
