@@ -55,14 +55,40 @@ const flightBooking = async (req, res) => {
                 travelers: req.body.travellers
             }
         })
-    ).then((response)=>{
-        console.log(response);
+    ).then(async (response) => {
+        console.log(response.data);
+
+        try {
+            // Find the user by id and update the bookedTicket array
+            const updatedUser = await User.findByIdAndUpdate(
+                userId,
+                {
+                    $push: {
+                        bookedTicket: {
+                            flightId: response.data.id,
+                            departureDate: departureDate,
+                            returnDate: returnDate,
+                            passengers: passengers
+                        }
+                    }
+                },
+                { new: true } // Return the updated document
+            );
+    
+            if (updatedUser) {
+                console.log("Booked ticket added successfully:", updatedUser);
+            } else {
+                console.log("User not found");
+            }
+        } catch (error) {
+            console.error("Error adding booked ticket:", error);
+        }
         res.status(201).json(response);
     })
-    .catch((error)=>{
-        console.log(error);
-        res.status(500).json(error);
-    })
+        .catch((error) => {
+            console.log(error);
+            res.status(500).json(error);
+        })
 };
 
 module.exports = {

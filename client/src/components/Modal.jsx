@@ -3,6 +3,8 @@ import React from "react";
 import "./Modal.css";
 import portsair from "../assets/airports";
 import axios from "axios";
+import { toast } from "react-toastify";
+import stripe from "react-stripe-checkout";
 
 function getAirportDataByIATACode(iataCode) {
     return portsair.find((airport) => airport.code === iataCode);
@@ -28,41 +30,61 @@ const Modal = ({ show, onClose, children, flightOffer, flight, SERVER_URL }) => 
     const arrAir = getAirportDataByIATACode(arrIata);
     const arrAirport = arrAir.name + " - " + arrAir.city + " " + arrIata;
 
-    const handleContinuePay = async(e) => {
+    const now = new Date();
+    now.setFullYear(now.getFullYear() - 12);
+    const today = now.toISOString().split("T")[0];
+    console.log(today);
+    const handleContinuePay = async (e) => {
         e.preventDefault();
-
-        const formData = {
-            flightOffers: [flightOffer.flightOffers[0]],
-            travellers: [
-                {
-                    id: "1",
-                    dateOfBirth: e.target.form.dob.value,
-                    name: {
-                      firstName: e.target.form.firstName.value,
-                      lastName: e.target.form.secondName.value,
-                  },
-                    gender: e.target.form.gender.value,
-                    contact: {
-                        emailAddress: e.target.form.email.value,
-                        phones: [
-                            {
-                                deviceType: "MOBILE",
-                                countryCallingCode: "91",
-                                number: e.target.form.phoneNumber.value,
-                            },
-                        ],
-                    },
-                },
-            ],
+        const validateEmail = (email) => {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            return emailRegex.test(email);
         };
-        const response = await axios.post(SERVER_URL + "/booking", formData);
-        if(response.status==201){
-            toast.success('Ticket booked');
-        }
-        else{
-            toast.erro('Server facing Issue');
-        }
 
+        if (e.target.form.firstName.value <= 0) {
+            toast.error("please enter firstName");
+        } else if (e.target.form.secondName.value.length <= 0) {
+            toast.error("please enter last name");
+        } else if (e.target.form.dob.value.length == 0) {
+            toast.error("please enter DOB ");
+        } else if (e.target.form.email.value.length <= 0 || !validateEmail(e.target.form.email.value)) {
+            toast.error("pleae enter valid email");
+        } else if (e.target.form.phoneNumber.value.length <= 0) {
+            toast.error("pleae enter phone number ");
+        } else {
+            const formData = {
+                userId:localStorage.getItem('userId'),
+                flightOffers: [flightOffer.flightOffers[0]],
+                travellers: [
+                    {
+                        id: "1",
+                        dateOfBirth: e.target.form.dob.value,
+                        name: {
+                            firstName: e.target.form.firstName.value,
+                            lastName: e.target.form.secondName.value,
+                        },
+                        gender: e.target.form.gender.value,
+                        contact: {
+                            emailAddress: e.target.form.email.value,
+                            phones: [
+                                {
+                                    deviceType: "MOBILE",
+                                    countryCallingCode: "91",
+                                    number: e.target.form.phoneNumber.value,
+                                },
+                            ],
+                        },
+                    },
+                ],
+            };
+            const response = await axios.post(SERVER_URL + "/booking", formData);
+            if (response.status == 201) {
+                toast.success("Ticket booked");
+                onClose();
+            } else {
+                toast.error("Server facing Issue");
+            }
+        }
     };
 
     return (
@@ -115,7 +137,7 @@ const Modal = ({ show, onClose, children, flightOffer, flight, SERVER_URL }) => 
                                 <input type="text" placeholder="Second Name" name="secondName" />
                             </div>
                             <div className="flex">
-                                <input type="date" name="dob" style={{ textTransform: "uppercase" }} />
+                                <input type="date" name="dob" max={today} style={{ textTransform: "uppercase" }} />
                                 <select id="class" name="gender">
                                     <option value="MALE">MALE</option>
                                     <option value="FEMLAE">FEMALE</option>
