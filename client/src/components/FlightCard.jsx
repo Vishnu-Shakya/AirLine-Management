@@ -10,7 +10,7 @@ const FlightCard = ({ flight, dictionaries, SERVER_URL }) => {
   // console.log(flight.itineraries[0].segments[0].aircraft.code)
   const { segments, duration, } = flight.itineraries[0];
   const { departure } = segments[0];
-  const  numberOfStops=segments.length;
+  const  numberOfStops=segments.length-1;
   const{arrival}=segments[numberOfStops-1];
   const aircraftCode  = flight.validatingAirlineCodes[0];
   const aircraftName = airlines[aircraftCode].name.split(" ")[0]+" "+((airlines[aircraftCode].name.split(" ")[1])?airlines[aircraftCode].name.split(" ")[1]:"");
