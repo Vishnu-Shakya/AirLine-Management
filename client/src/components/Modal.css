@@ -28,8 +28,8 @@
   justify-content: space-between; /* Space between the title and close button */
   align-items: center;
   padding: 10px 20px; /* Add padding to the header */
-  background: #007bff; /* Header background color */
-  color: white; /* Header font color */
+  background: #51e2f5; /* Header background color */
+  color: black; /* Header font color */
   border-radius: 8px 8px 0 0; /* Rounded corners for the header */
   border-bottom: 1px solid #0056b3; /* Darker border color */
   gap: 10px;
