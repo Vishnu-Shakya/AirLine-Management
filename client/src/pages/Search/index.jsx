@@ -18,12 +18,18 @@ function Search({ SERVER_URL, token }) {
   const [value2, setValue2] = useState("");
   const [searchVisible, setSearchVisible] = useState(false);
   const [searchVisible2, setSearchVisible2] = useState(false);
-
+  const [flightdata,setflightdata] = useState(flights.data);
+  const [departure,setdeparture] = useState("");
   const inputRef1 = useRef(null);
   const inputRef2 = useRef(null);
   const suggestionRef1 = useRef(null);
   const suggestionRef2 = useRef(null);
 
+  const changeflightdata = ((flight)=>
+  {
+    setflightdata(flight);
+  })
+console.log(flightdata)
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
@@ -162,7 +168,7 @@ function Search({ SERVER_URL, token }) {
     document.getElementById("roundtrip").style.border = "1px #007bff solid";
   };
 
-  console.log(token);
+  
   return (
     <div className="searchpage">
       <div className="border-2 ">
@@ -295,10 +301,13 @@ function Search({ SERVER_URL, token }) {
       </div>
       <div className="flex justify-around pt-4 mx-auto">
         <div className="w-1/5 hidden lg:flex">
-          <Filters></Filters>
+          <Filters
+          a = {flightdata}
+          setA = {changeflightdata}
+          real={flights.data}></Filters>
         </div>
         <div className="w-[100%] lg:w-[67%]">
-          {flights.data.map((flight, index) => (
+          {flightdata.map((flight, index) => (
             <FlightCard
               key={index}
               flight={flight}
