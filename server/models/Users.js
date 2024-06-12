@@ -45,7 +45,6 @@ const UserSchema = new mongoose.Schema({
         {
             flightId: String,
             departureDate: String,
-            returnDate: String,
             passengers: Number
         }
     ],
@@ -53,7 +52,6 @@ const UserSchema = new mongoose.Schema({
         {
             flightId: String,
             departureDate: String,
-            returnDate: String,
             passengers: Number
         }
     ]
