@@ -9,18 +9,18 @@ const Filters = ({ a, setA, real }) => {
     // handleclickfun("cc");
 
   };
-  
+  let r1 = real;
   useEffect(() => {
-    let filteredFlights = real;
+    let filteredFlights = r1;
 
     // Apply price filter
     filteredFlights = filteredFlights.filter((flight) => parseInt(flight.price.base) <= slideprice);
 
    
-    
+
 
     setA(filteredFlights);
-  }, [slideprice, selectedfilters, real, setA]); 
+  }, [slideprice]); 
 
 
   
@@ -212,11 +212,12 @@ const Filters = ({ a, setA, real }) => {
           
         }
         console.log(fin.length+" befpor");
-        fin = fin.filter((e) =>(parseInt(e.price.base)<=slideprice))
+        // fin = fin.filter((e) =>(parseInt(e.price.base)<=slideprice))
 
         console.log(fin.length);
+        r1 = fin;
         return fin;
-        });},[selectedfilters,slideprice])        
+        });},[selectedfilters])        
     
  
   
