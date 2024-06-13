@@ -10,8 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@stripe/react-stripe-js": "^2.7.1",
-    "@stripe/stripe-js": "^3.5.0",
     "axios": "^1.7.0",
     "date-fns": "^3.6.0",
     "html2canvas": "^1.4.1",
@@ -19,7 +17,7 @@
 <<<<<<< HEAD
     "jspdf": "^2.5.1",
 =======
-    "razorpay": "^2.9.4",
+
 >>>>>>> d9c9604 (Added payment Form)
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
