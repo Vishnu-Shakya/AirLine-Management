@@ -23,9 +23,9 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
   console.log(includedCheckedBags);
-  const baggage = () =>{
+  const baggage = () => {
     return includedCheckedBags.quantity;
-}
+  }
 
   const handlePassengerChange = (e, type) => {
     const value = parseInt(e.target.value);
@@ -96,73 +96,69 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
     return `${hours}h ${minutes}m`;
   };
 
+  // Function to calculate total time taken in minutes for the entire journey
+  const calculateTotalTimeTaken = () => {
+    let totalTimeInMinutes = 0;
 
-    // Function to calculate total time taken in minutes for the entire journey
-    const calculateTotalTimeTaken = () => {
-        let totalTimeInMinutes = 0;
-        
-        const arrivalTime = new Date(segments[segments.length - 1].arrival.at);
-        const departureTime = new Date(segments[0].departure.at);
-        totalTimeInMinutes = differenceInMinutes(arrivalTime, departureTime);
+    const arrivalTime = new Date(segments[segments.length - 1].arrival.at);
+    const departureTime = new Date(segments[0].departure.at);
+    totalTimeInMinutes = differenceInMinutes(arrivalTime, departureTime);
 
-      
-        // Convert total time in minutes to hours and minutes
-        const hours = Math.floor(totalTimeInMinutes / 60);
-        const minutes = totalTimeInMinutes % 60;
-      
-        // Return formatted string with hours and minutes
-        return `${hours} hours ${minutes} minutes`;
-      };
-      
-    // Inside your Modal component:
-    const totalTimeTaken = calculateTotalTimeTaken();
-    
+    // Convert total time in minutes to hours and minutes
+    const hours = Math.floor(totalTimeInMinutes / 60);
+    const minutes = totalTimeInMinutes % 60;
+
+    // Return formatted string with hours and minutes
+    return `${hours} hours ${minutes} minutes`;
+  };
+
+  // Inside your Modal component:
+  const totalTimeTaken = calculateTotalTimeTaken();
 
   return (
     <div className="modal" onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <div className="modal-header">
           <h4 className="modal-title">Flight Details</h4>
-          <button onClick={onClose} className="close-button">
+          <button onClick={onClose} className="modal-close-button">
             &times;
           </button>
         </div>
         <div className="modal-body">
           {/* Overall Route Information */}
-        <div className="overall-route">
+          <div className="modal-overall-route">
             <h3>Flight Route:</h3>
             <p>
-                {segments.map((segment, index) => {
+              {segments.map((segment, index) => {
                 const iata = segment.departure.iataCode;
                 const airport = getAirportDataByIATACode(iata);
                 const iata1 = segment.arrival.iataCode;
                 const airport1 = getAirportDataByIATACode(iata1);
                 return (
-                    <span key={index}>
+                  <span key={index}>
                     {index > 0 && " -> "}
                     {airport.city} ({iata})
                     {index === segments.length - 1 && ` -> ${airport1.city} (${iata1})`}
-                    </span>
+                  </span>
                 );
-                })}
+              })}
             </p>
             <p>
-                <strong>Number of Stops: </strong>
-                {segments.length - 1}
+              <strong>Number of Stops: </strong>
+              {segments.length - 1}
             </p>
             <p>
-                <strong>Total Time taken: </strong>
-                {totalTimeTaken}
+              <strong>Total Time taken: </strong>
+              {totalTimeTaken}
             </p>
             <p>
-                <strong>Number of baggages allowed : </strong>
-                {baggage()}
+              <strong>Number of baggages allowed: </strong>
+              {baggage()}
             </p>
-        </div>
-
+          </div>
 
           {/* Main Information */}
-          <div className="main-info">
+          <div className="modal-main-info">
             {segments.map((segment, index) => {
               const depIata = segment.departure.iataCode;
               const depAir = getAirportDataByIATACode(depIata);
@@ -177,12 +173,12 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
                   ? calculateLayoverTime(
                     segment.departure.at,
                     segment.arrival.at
-                      
-                    )
+
+                  )
                   : null;
 
               return (
-                <div key={index} className="segment-info">
+                <div key={index} className="modal-segment-info">
                   <h5>Segment {index + 1}</h5>
                   <p>
                     <strong>Flight Number:</strong> {segment.number}
@@ -214,7 +210,7 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
             })}
           </div>
           {/* Additional Information */}
-          <div className="additional-info">
+          <div className="modal-additional-info">
             <p>
               <strong>Base Price:</strong>{" "}
               {flightOffer.flightOffers[0].price.base}{" "}
@@ -230,8 +226,8 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
             </p>
             {/* Passenger details */}
             <h3>Passenger Details</h3>
-            <form className="passenger-form">
-              <div className="form-group">
+            <form className="modal-passenger-form">
+              <div className="modal-form-group">
                 <label>Number of Adults:</label>
                 <input
                   type="number"
@@ -240,8 +236,7 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
                   onChange={(e) => handlePassengerChange(e, "adults")}
                 />
               </div>
-              <div className="form-group
-">
+              <div className="modal-form-group">
                 <label>Number of Children:</label>
                 <input
                   type="number"
@@ -251,13 +246,13 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
                 />
               </div>
               {Array.from({ length: adults + children }).map((_, i) => (
-                <div key={i} className="passenger-info">
+                <div key={i} className="modal-passenger-info">
                   <h4>Passenger {i + 1}</h4>
-                  <div className="form-group">
+                  <div className="modal-form-group">
                     <input type="text" placeholder="First Name" name={`firstName-${i}`} />
                     <input type="text" placeholder="Second Name" name={`secondName-${i}`} />
                   </div>
-                  <div className="form-group">
+                  <div className="modal-form-group">
                     <input type="date" name={`dob-${i}`} />
                     <select name={`gender-${i}`}>
                       <option value="MALE">MALE</option>
@@ -265,11 +260,11 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
                       <option value="OTHER">OTHER</option>
                     </select>
                   </div>
-                  <div className="form-group">
+                  <div className="modal-form-group">
                     <label>Email Address:</label>
                     <input type="email" name={`email-${i}`} required />
                   </div>
-                  <div className="form-group">
+                  <div className="modal-form-group">
                     <label>Phone Number:</label>
                     <input type="text" name={`phoneNumber-${i}`} required />
                   </div>
@@ -279,7 +274,7 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
                 <strong>Total Fare:</strong> {totalFare.toFixed(2)}{" "}
                 {flightOffer.flightOffers[0].price.currency}
               </p>
-              <button className="book-button" onClick={handleContinuePay}>
+              <button className="modal-book-button" onClick={handleContinuePay}>
                 Continue
               </button>
             </form>
