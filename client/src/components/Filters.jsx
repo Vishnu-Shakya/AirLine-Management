@@ -3,10 +3,25 @@ import React, { useState,useEffect } from "react";
 const Filters = ({ a, setA, real }) => {
   
   const [selectedfilters,setfilters]  = useState([]);
+  const [slideprice,setslideprice] = useState(30000);
   
+  const handlechangefun = (e) =>{setslideprice(e.target.value)
+    // handleclickfun("cc");
+
+  };
   
-  
-  
+  useEffect(() => {
+    let filteredFlights = real;
+
+    // Apply price filter
+    filteredFlights = filteredFlights.filter((flight) => parseInt(flight.price.base) <= slideprice);
+
+   
+    
+
+    setA(filteredFlights);
+  }, [slideprice, selectedfilters, real, setA]); 
+
 
   
 
@@ -191,17 +206,22 @@ const Filters = ({ a, setA, real }) => {
                                       
                                     }
                                   }
+                                }else{
+                                  console.log("here");
                                 }
           
         }
-  
+        console.log(fin.length+" befpor");
+        fin = fin.filter((e) =>(parseInt(e.price.base)<=slideprice))
+
+        console.log(fin.length);
         return fin;
-        });},[selectedfilters])
+        });},[selectedfilters,slideprice])        
     
  
   
 
-  console.log(selectedfilters);
+  console.log(real);
   return (
     <div className="w-[98%] p-4 border-r border-gray-300 mx-auto bg-[#fff] ">
       <h2 className="font-bold">Popular Filters</h2>
@@ -223,10 +243,13 @@ const Filters = ({ a, setA, real }) => {
 
       <h2 className="font-bold mt-4">One Way Price</h2>
       <div className="flex justify-between mt-2">
-        <span>₹9,293</span>
-        <span>₹32,400</span>
+        <span>₹0</span>
+        <span>{slideprice}</span>
+        <span>₹2,00,000</span>
+        
       </div>
-      <input type="range" className="w-full mt-2" />
+      <input type="range" min = "0" max = "200000"  step = "10" value = {slideprice} 
+      onChange={handlechangefun} className="w-full mt-2" />
 
       <h2 className="font-bold mt-4">Stops From New Delhi</h2>
       <div className="flex items-center mt-2">
