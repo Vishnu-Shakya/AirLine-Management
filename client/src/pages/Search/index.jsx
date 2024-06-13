@@ -24,19 +24,19 @@ function Search({ SERVER_URL, token }) {
     const inputRef2 = useRef(null);
     const suggestionRef1 = useRef(null);
     const suggestionRef2 = useRef(null);
-  const location = useLocation();
-  const flights = location.state?.flights || [];
-  const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState("");
-  const [value2, setValue2] = useState("");
-  const [searchVisible, setSearchVisible] = useState(false);
-  const [searchVisible2, setSearchVisible2] = useState(false);
+  // const location = useLocation();
+  // const flights = location.state?.flights || [];
+  // const [loading, setLoading] = useState(false);
+  // const [value, setValue] = useState("");
+  // const [value2, setValue2] = useState("");
+  // const [searchVisible, setSearchVisible] = useState(false);
+  // const [searchVisible2, setSearchVisible2] = useState(false);
   const [flightdata,setflightdata] = useState(flights.data);
-  const [departure,setdeparture] = useState("");
-  const inputRef1 = useRef(null);
-  const inputRef2 = useRef(null);
-  const suggestionRef1 = useRef(null);
-  const suggestionRef2 = useRef(null);
+  // const [departure,setdeparture] = useState("");
+  // const inputRef1 = useRef(null);
+  // const inputRef2 = useRef(null);
+  // // const suggestionRef1 = useRef(null);
+  // // const suggestionRef2 = useRef(null);
 
   const changeflightdata = ((flight)=>
   {
