@@ -14,12 +14,8 @@
     "date-fns": "^3.6.0",
     "html2canvas": "^1.4.1",
     "jsonwebtoken": "^9.0.2",
-<<<<<<< HEAD
     "jspdf": "^2.5.1",
-=======
-
->>>>>>> d9c9604 (Added payment Form)
-    "react": "^18.2.0",
+     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
     "react-stripe-checkout": "^2.6.3",
