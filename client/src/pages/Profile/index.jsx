@@ -20,7 +20,7 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
         state: "Madhya Pradesh",
     });
     const [bookedTicket, setBookedTicket] = useState(null);
-
+    
     const maxDate = new Date().toISOString().split("T")[0];
 
     useEffect(() => {
@@ -54,6 +54,7 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
         fetchProfile();
     }, [SERVER_URL]);
 
+<<<<<<< HEAD
     const cancelFilghtHandle = async (e) => {
         e.preventDefault()
         const formData={
@@ -64,6 +65,9 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
 
 
     };
+=======
+    
+>>>>>>> d9c9604 (Added payment Form)
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;

@@ -93,6 +93,7 @@ const flightBooking = async (req, res) => {
 };
 const ticketInfo = async (req, res) => {
     const bookedTickets = req.body;
+    console.log(bookedTickets);
 
     try {
         const resultPromises = bookedTickets.map(ticket =>

@@ -4,6 +4,7 @@ import portsair from "../assets/airports";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { format, differenceInMinutes } from "date-fns";
+import DummyPayment from './DummyPayment'; // Import DummyPayment component
 
 function getAirportDataByIATACode(iataCode) {
   return portsair.find((airport) => airport.code === iataCode);
@@ -22,7 +23,8 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
 
   const [adults, setAdults] = useState(1);
   const [children, setChildren] = useState(0);
-  console.log(includedCheckedBags);
+  const [showPayment, setShowPayment] = useState(false); // New state for showing payment form
+
   const baggage = () => {
     return includedCheckedBags.quantity;
   }
@@ -71,6 +73,7 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
       const response = await axios.post(SERVER_URL + "/booking", formData);
       if (response.status === 201) {
         toast.success("Ticket booked");
+        setShowPayment(true); // Show payment form upon successful booking
       } else {
         toast.error("Server facing issue");
       }
@@ -275,10 +278,20 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
                 {flightOffer.flightOffers[0].price.currency}
               </p>
               <button className="modal-book-button" onClick={handleContinuePay}>
-                Continue
+                Continue To Pay
               </button>
             </form>
           </div>
+          {/* Dummy Payment Form */}
+          {showPayment && (
+            <div className="modal-payment">
+              <h3>Payment</h3>
+              <DummyPayment totalFare={totalFare} onPaymentSuccess={() => {
+                setShowPayment(false);
+                toast.success('Payment successful!');
+              }} />
+            </div>
+          )}
         </div>
       </div>
     </div>
