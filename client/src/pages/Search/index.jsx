@@ -10,7 +10,20 @@ import axios from "axios";
 import airportdata from "../../assets/airports.js";
 console.log(airportdata[0]);
 
+
 function Search({ SERVER_URL, token }) {
+    const location = useLocation();
+    const flights = location.state?.flights || [];
+    const [loading, setLoading] = useState(false);
+    const [value, setValue] = useState("");
+    const [value2, setValue2] = useState("");
+    const [searchVisible, setSearchVisible] = useState(false);
+    const [searchVisible2, setSearchVisible2] = useState(false);
+
+    const inputRef1 = useRef(null);
+    const inputRef2 = useRef(null);
+    const suggestionRef1 = useRef(null);
+    const suggestionRef2 = useRef(null);
   const location = useLocation();
   const flights = location.state?.flights || [];
   const [loading, setLoading] = useState(false);
@@ -50,123 +63,162 @@ console.log(flightdata)
       }
     };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    const handleFocus1 = () => {
+        setSearchVisible(true);
     };
-  }, []);
 
-  const handleFocus1 = () => {
-    setSearchVisible(true);
-  };
+    const handleFocus2 = () => {
+        setSearchVisible2(true);
+    };
 
-  const handleFocus2 = () => {
-    setSearchVisible2(true);
-  };
+    const changeVal = (e) => {
+        setValue(e.target.value);
+        setSearchVisible(true);
+    };
 
-  const changeVal = (e) => {
-    setValue(e.target.value);
-    setSearchVisible(true);
-  };
+    const changeVal2 = (e) => {
+        setValue2(e.target.value);
+        setSearchVisible2(true);
+    };
 
-  const changeVal2 = (e) => {
-    setValue2(e.target.value);
-    setSearchVisible2(true);
-  };
+    const owshow = () => {
+        var y = document.getElementById("oneway");
+        var x = document.getElementById("roundtrip");
+        document.getElementById("oneway").style.background = "white";
+        x.addEventListener(
+            "mouseenter",
+            function (event) {
+                event.target.style.background = "rgb(2, 60, 148)";
+                event.target.style.color = "white";
+            },
+            false
+        );
+        x.addEventListener(
+            "mouseleave",
+            function (event) {
+                event.target.style.background = "white";
+                event.target.style.color = "#007bff";
+            },
+            false
+        );
+        y.addEventListener(
+            "mouseenter",
+            function (event) {
+                event.target.style.background = "rgb(2, 60, 148)";
+                event.target.style.color = "white";
+            },
+            false
+        );
+        y.addEventListener(
+            "mouseleave",
+            function (event) {
+                event.target.style.background = "#007bff";
+                event.target.style.color = "white";
+            },
+            false
+        );
+        document.getElementById("roundtrip").style.background = "white";
+        document.getElementById("roundtrip").style.color = "#007bff";
+        document.getElementById("roundtrip").style.border = "1px #007bff solid";
 
+        document.getElementById("oneway").style.background = "#007bff";
+        document.getElementById("oneway").style.color = "white";
+    };
 
-  
-  const owshow = () => {
-    var y = document.getElementById("oneway");
-    var x = document.getElementById("roundtrip");
-    document.getElementById("oneway").style.background = "white";
-    x.addEventListener("mouseenter", function( event ) {   
-      event.target.style.background = "rgb(2, 60, 148)";
-      event.target.style.color = "white";
-    }, false);
-    x.addEventListener("mouseleave", function( event ) {   
-      event.target.style.background = "white";
-      event.target.style.color = "#007bff";
-      
-    }, false);
-    y.addEventListener("mouseenter", function( event ) {   
-      event.target.style.background = "rgb(2, 60, 148)";
-      event.target.style.color = "white";
-    }, false);
-    y.addEventListener("mouseleave", function( event ) {   
-      event.target.style.background = "#007bff";
-      event.target.style.color = "white";
-      
-    }, false);
-    document.getElementById("roundtrip").style.background = "white";
-    document.getElementById("roundtrip").style.color = "#007bff";
-    document.getElementById("roundtrip").style.border = "1px #007bff solid";
+    const rtshow = () => {
+        var x = document.getElementById("oneway");
+        var y = document.getElementById("roundtrip");
+        document.getElementById("oneway").style.background = "white";
+        x.addEventListener(
+            "mouseenter",
+            function (event) {
+                event.target.style.background = "rgb(2, 60, 148)";
+                event.target.style.color = "white";
+            },
+            false
+        );
+        x.addEventListener(
+            "mouseleave",
+            function (event) {
+                event.target.style.background = "white";
+                event.target.style.color = "#007bff";
+            },
+            false
+        );
+        y.addEventListener(
+            "mouseenter",
+            function (event) {
+                event.target.style.background = "rgb(2, 60, 148)";
+                event.target.style.color = "white";
+            },
+            false
+        );
+        y.addEventListener(
+            "mouseleave",
+            function (event) {
+                event.target.style.background = "#007bff";
+                event.target.style.color = "white";
+            },
+            false
+        );
+        document.getElementById("oneway").style.color = "#007bff";
+        document.getElementById("oneway").style.border = "1px #007bff solid";
 
-    document.getElementById("oneway").style.background = "#007bff";
-    document.getElementById("oneway").style.color = "white";
+        document.getElementById("roundtrip").style.background = "#007bff";
 
-  };
+        document.getElementById("roundtrip").style.color = "white";
+    };
 
-  const rtshow = () => {
-    var x = document.getElementById("oneway");
-    var y = document.getElementById("roundtrip");
-    document.getElementById("oneway").style.background = "white";
-    x.addEventListener("mouseenter", function( event ) {   
-      event.target.style.background = "rgb(2, 60, 148)";
-      event.target.style.color = "white";
-    }, false);
-    x.addEventListener("mouseleave", function( event ) {   
-      event.target.style.background = "white";
-      event.target.style.color = "#007bff";
-      
-    }, false);
-    y.addEventListener("mouseenter", function( event ) {   
-      event.target.style.background = "rgb(2, 60, 148)";
-      event.target.style.color = "white";
-    }, false);
-    y.addEventListener("mouseleave", function( event ) {   
-      event.target.style.background = "#007bff";
-      event.target.style.color = "white";
-      
-    }, false);
-    document.getElementById("oneway").style.color = "#007bff";
-    document.getElementById("oneway").style.border = "1px #007bff solid";
-    
-    document.getElementById("roundtrip").style.background = "#007bff";
+    const sshow = () => {
+        var x = document.getElementById("oneway");
+        var y = document.getElementById("roundtrip");
+        document.getElementById("oneway").style.background = "white";
+        x.addEventListener(
+            "mouseenter",
+            function (event) {
+                event.target.style.background = "rgb(2, 60, 148)";
+                event.target.style.color = "white";
+            },
+            false
+        );
+        x.addEventListener(
+            "mouseleave",
+            function (event) {
+                event.target.style.background = "white";
+                event.target.style.color = "#007bff";
+            },
+            false
+        );
+        y.addEventListener(
+            "mouseenter",
+            function (event) {
+                event.target.style.background = "rgb(2, 60, 148)";
+                event.target.style.color = "white";
+            },
+            false
+        );
+        y.addEventListener(
+            "mouseleave",
+            function (event) {
+                event.target.style.background = "white";
+                event.target.style.color = "#007bff";
+            },
+            false
+        );
+        document.getElementById("oneway").style.color = "#007bff";
+        document.getElementById("oneway").style.border = "1px #007bff solid";
 
-    document.getElementById("roundtrip").style.color = "white";
-  };
+        document.getElementById("roundtrip").style.background = "white";
 
-  const sshow = () => {
-    var x = document.getElementById("oneway");
-    var y = document.getElementById("roundtrip");
-    document.getElementById("oneway").style.background = "white";
-    x.addEventListener("mouseenter", function( event ) {   
-      event.target.style.background = "rgb(2, 60, 148)";
-      event.target.style.color = "white";
-    }, false);
-    x.addEventListener("mouseleave", function( event ) {   
-      event.target.style.background = "white";
-      event.target.style.color = "#007bff";
-      
-    }, false);
-    y.addEventListener("mouseenter", function( event ) {   
-      event.target.style.background = "rgb(2, 60, 148)";
-      event.target.style.color = "white";
-    }, false);
-    y.addEventListener("mouseleave", function( event ) {   
-      event.target.style.background = "white";
-      event.target.style.color = "#007bff";
-      
-    }, false);
-    document.getElementById("oneway").style.color = "#007bff";
-    document.getElementById("oneway").style.border = "1px #007bff solid";
-    
-    document.getElementById("roundtrip").style.background = "white";
-
-    document.getElementById("roundtrip").style.color = "#007bff";
-    document.getElementById("roundtrip").style.border = "1px #007bff solid";
-  };
+        document.getElementById("roundtrip").style.color = "#007bff";
+        document.getElementById("roundtrip").style.border = "1px #007bff solid";
+    };
 
   
   return (
@@ -233,52 +285,34 @@ console.log(flightdata)
               )}
             </div>
 
-            <div className="search-input-field searchsecond" ref={inputRef2}>
-              <label htmlFor="search-to">To:</label>
-              <input
-                type="text"
-                id="search-to"
-                placeholder="LAX"
-                value={value2}
-                onFocus={handleFocus2}
-                onChange={changeVal2}
-                name="to"
-              />
-              {searchVisible2 && (
-                <ul className="search-search-options" ref={suggestionRef2}>
-                  {airportdata
-                    .filter((e) => {
-                      const gin = value2.toLowerCase();
-                      const toki =
-                        e.code.toLowerCase() +
-                        " " +
-                        e.name.toLowerCase() +
-                        " " +
-                        e.city.toLowerCase();
-                      const toki2 =
-                        e.code.toLowerCase() +
-                        "-" +
-                        e.name.toLowerCase() +
-                        "-" +
-                        e.city.toLowerCase();
-                      return toki.includes(gin) || toki2.includes(gin);
-                    })
-                    .slice(0, 5)
-                    .map((e) => (
-                      <li
-                        className="search-s-o-l"
-                        key={e.code}
-                        onClick={() => {
-                          setValue2(e.code + "-" + e.name + "-" + e.city);
-                          setSearchVisible2(false);
-                        }}
-                      >
-                        {e.code + "-" + e.name + "-" + e.city}
-                      </li>
-                    ))}
-                </ul>
-              )}
-            </div>
+                        <div className="search-input-field searchsecond" ref={inputRef2}>
+                            <label htmlFor="search-to">To:</label>
+                            <input type="text" id="search-to" placeholder="LAX" value={value2} onFocus={handleFocus2} onChange={changeVal2} name="to" />
+                            {searchVisible2 && (
+                                <ul className="search-search-options" ref={suggestionRef2}>
+                                    {airportdata
+                                        .filter((e) => {
+                                            const gin = value2.toLowerCase();
+                                            const toki = e.code.toLowerCase() + " " + e.name.toLowerCase() + " " + e.city.toLowerCase();
+                                            const toki2 = e.code.toLowerCase() + "-" + e.name.toLowerCase() + "-" + e.city.toLowerCase();
+                                            return toki.includes(gin) || toki2.includes(gin);
+                                        })
+                                        .slice(0, 5)
+                                        .map((e) => (
+                                            <li
+                                                className="search-s-o-l"
+                                                key={e.code}
+                                                onClick={() => {
+                                                    setValue2(e.code + "-" + e.name + "-" + e.city);
+                                                    setSearchVisible2(false);
+                                                }}
+                                            >
+                                                {e.code + "-" + e.name + "-" + e.city}
+                                            </li>
+                                        ))}
+                                </ul>
+                            )}
+                        </div>
 
             <div className="search-input-field">
               <label htmlFor="search-departure">Departure:</label>
