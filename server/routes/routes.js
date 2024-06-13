@@ -2,7 +2,7 @@ const express=require('express');
 const router = express.Router();
 
 const {signup,login,auth,profileUpdate,profileInfo}=require('../controllers/signup');
-const {searchFlight,flightPricing,flightBooking,ticketInfo}=require('../controllers/flight')
+const {searchFlight,flightPricing,flightBooking,ticketInfo,ticketCancel}=require('../controllers/flight')
 
 router.route('/signup').post(signup);
 router.route('/login').post(login);
@@ -15,6 +15,7 @@ router.route('/search-flights').post(searchFlight);
 router.route('/pricing').post(flightPricing);
 router.route('/booking').post(flightBooking);
 router.route('/ticketInfo').post(ticketInfo);
+router.route('/ticketCancel').post(ticketCancel);
 
 
 

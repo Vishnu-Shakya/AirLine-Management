@@ -4,8 +4,8 @@ const flights = require("../db/tempFlight.json");
 const User = require('../models/Users.js');
 
 const amadeus = new Amadeus({
-    clientId: "26bsRbwMQleZbDNkhSUFtIYZaTcnAB9V",
-    clientSecret: "2QhXPz0alULAUn8v",
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
 });
 
 const searchFlight = async (req, res) => {
@@ -113,6 +113,38 @@ const ticketInfo = async (req, res) => {
         res.status(500).send(error.message);
     }
 };
+const ticketCancel = async (req, res) => {
+    const bookedTickets = req.body;
+    console.log(req.body);
+    amadeus.booking.flightOrder("eJzTd9f38nCM8PAFAAs%2BAmY%3D").delete()
+        .then((response) => {
+            console.log(response);
+            res.status(200).json(response);
+        })
+        .catch(error => {
+            console.error('Error fetching booking details:', error);
+            throw new Error(error.message);
+        })
+
+    // try {
+    //     const resultPromises = bookedTickets.map(ticket =>
+    //         amadeus.booking.flightOrder(ticket.flightId).get()
+    //             .then(response => response.data)
+    //             .catch(error => {
+    //                 console.error('Error fetching booking details:', error);
+    //                 throw new Error(error.message);
+    //             })
+    //     );
+
+    //     const results = await Promise.all(resultPromises);
+
+    //     res.status(200).json(results);
+
+    // } catch (error) {
+    //     console.error('Error:', error);
+    //     res.status(500).send(error.message);
+    // }
+};
 
 
 
@@ -120,5 +152,6 @@ module.exports = {
     searchFlight,
     flightPricing,
     flightBooking,
-    ticketInfo
+    ticketInfo,
+    ticketCancel
 };

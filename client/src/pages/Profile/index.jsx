@@ -5,6 +5,8 @@ import axios from "axios";
 import avatar from "../../assets/avatar.jpeg";
 import { toast } from "react-toastify";
 import FlightCard from "../../components/FlightCard.jsx";
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 const Profile = ({ SERVER_URL, handleStateChange }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -29,6 +31,9 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
                 const userProfile = response.data.foundUser;
 
                 if (response.status === 200) {
+                    const { bookedTicket } = response.data.foundUser;
+                    const response2 = await axios.post(SERVER_URL + "/ticketInfo", bookedTicket);
+                    console.log("response2:", response2);
                     setProfileInfo({
                         name: userProfile.name,
                         birthday: userProfile.birthday,
@@ -38,9 +43,6 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
                         pincode: userProfile.address.pincode,
                         state: userProfile.address.state,
                     });
-                    const { bookedTicket } = response.data.foundUser;
-                    const response2 = await axios.post(SERVER_URL + "/ticketInfo", bookedTicket);
-                    console.log("response2:", response2);
                     setBookedTicket(response2.data);
                 } else {
                     console.error("Something went wrong");
@@ -51,6 +53,17 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
         };
         fetchProfile();
     }, [SERVER_URL]);
+
+    const cancelFilghtHandle = async (e) => {
+        e.preventDefault()
+        const formData={
+            id:"eJzTd9f38nCM8PAFAAs%2BAmY%3D"
+        };
+        const response2 = await axios.post(SERVER_URL + "/ticketCancel", formData);
+        console.log(response2);
+
+
+    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -98,16 +111,24 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
         setIsEditing(false);
     };
 
-    const navActiveLinkHandle = (e) => {
-        e.preventDefault();
+    const printDocument = () => {
+        const input = document.getElementById("divToPrint");
 
-        document.querySelectorAll(".nav-link").forEach((p) => {
-            p.classList.remove("nav-active");
+        html2canvas(input, { scale: 2 }).then((canvas) => {
+            const imgData = canvas.toDataURL("image/png");
+            const pdf = new jsPDF("p", "mm", "a4");
+
+            // Calculate the width and height in PDF units (mm)
+            const pdfWidth = pdf.internal.pageSize.getWidth();
+            const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+            pdf.addImage(imgData, "JPEG", 0, 0, pdfWidth, pdfHeight);
+            pdf.save("ticket.pdf");
         });
-        e.currentTarget.classList.add("nav-active");
     };
 
     const navigate = useNavigate();
+
     const handleLogoutClick = async () => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("userId");
@@ -118,21 +139,6 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
     return (
         <div>
             <div className="flex flex-col justify-center items-center w-4/5 mx-auto">
-                {/* <div className="left">
-          <div className="flex flex-col justify-center items-center m-4">
-            <img src={avatar} alt="" className='bg-green-400 w-36 h-36 rounded-lg' />
-            <p>{profileInfo.name}</p>
-          </div>
-
-          <div className="flex flex-col items-start p-6">
-            <p className='nav-link flex nav-active' onClick={navActiveLinkHandle}>Profile</p>
-            <p className='nav-link flex' onClick={navActiveLinkHandle}>Login details</p>
-            <p className='nav-link flex' onClick={navActiveLinkHandle}>Save travelers</p>
-            <p className='nav-link flex' onClick={navActiveLinkHandle}>Booked ticket</p>
-            <p className='nav-link flex' onClick={navActiveLinkHandle}>Ticket history</p>
-            <p className='nav-link flex' onClick={handleLogoutClick}>Logout</p>
-          </div>
-        </div> */}
                 <div className="right">
                     <div className="profile-info">
                         <h3 className="text-[2rem]">My Profile</h3>
@@ -223,6 +229,7 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
                     <div className="bg-white p-5 rounded-[5px] ">
                         <h3 className="text-[2rem]">Your Booked Ticket</h3>
                         {bookedTicket ? <p>design to ticket history </p> : <p>No Booked ticket</p>}
+                        <button onClick={cancelFilghtHandle}>cancel ticket</button>
                         <div className=" w-[90%] h-96"></div>
                     </div>
                     <div className="flex w-[90%] h-[400px]"></div>
