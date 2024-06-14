@@ -63,7 +63,7 @@ const flightBooking = async (req, res) => {
         try {
             // Find the user by id and update the bookedTicket array
             const updatedUser = await User.findByIdAndUpdate(
-                req.body.userId,
+                _id:req.body.userId,
                 {
                     $push: {
                         bookedTicket: {
