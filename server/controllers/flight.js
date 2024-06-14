@@ -61,35 +61,33 @@ const flightBooking = async (req, res) => {
         })
     ).then(async (response) => {
         console.log(response.data);
-
         try {
             // Find the user by id and update the bookedTicket array
-            const foundUser = await User.findOne({ _id:req.body.userId});
-            console.log(foundUser);
+            const foundUser = await User.findOne({ _id: req.body.userId });
             const updatedUser = await User.findByIdAndUpdate(
                 foundUser._id,
                 {
                     $push: {
                         bookedTicket: {
                             flightId: response.data.id,
-                            departureDate: response.data.flightOffers[0].itineraries[0].segments[0].departure.at.split('T')[0],
-                            passengers: req.body.travellers.length
+                            ticketString: JSON.stringify(response.data),
+                            status: response.data.ticketingAgreement.option
                         }
                     }
                 },
-                { new: true } 
+                { new: true }
             );
 
             if (updatedUser) {
                 console.log("Booked ticket added successfully:", updatedUser);
-                 res.status(201).json(response);
+                res.status(201).json(response);
             } else {
                 console.log("User not found");
             }
         } catch (error) {
             console.error("Error adding booked ticket:", error);
         }
-       
+
     })
         .catch((error) => {
             console.log(error);
@@ -101,14 +99,15 @@ const ticketInfo = async (req, res) => {
     console.log(bookedTickets);
 
     try {
-        const resultPromises = bookedTickets.map(ticket =>
-            amadeus.booking.flightOrder(ticket.flightId).get()
-                .then(response => response.data)
-                .catch(error => {
-                    console.error('Error fetching booking details:', error);
-                    throw new Error(error.message);
-                })
-        );
+        const resultPromises = bookedTickets.map(ticket => {
+            const res = {
+                flightId: ticket.fligthId,
+                ticket:JSON.parse(ticket.ticketString),
+                status:ticket.status
+
+            }
+            return res;
+        });
 
         const results = await Promise.all(resultPromises);
 

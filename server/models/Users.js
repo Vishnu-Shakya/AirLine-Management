@@ -44,15 +44,14 @@ const UserSchema = new mongoose.Schema({
     bookedTicket: [
         {
             flightId: String,
-            departureDate: String,
-            passengers: Number
+            ticketString:String,
+            status:String
         }
     ],
     ticketHistory: [
         {
             flightId: String,
-            departureDate: String,
-            passengers: Number
+            ticketString:String
         }
     ]
 });
