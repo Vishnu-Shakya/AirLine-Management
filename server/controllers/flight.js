@@ -78,13 +78,14 @@ const flightBooking = async (req, res) => {
 
             if (updatedUser) {
                 console.log("Booked ticket added successfully:", updatedUser);
+                 res.status(201).json(response);
             } else {
                 console.log("User not found");
             }
         } catch (error) {
             console.error("Error adding booked ticket:", error);
         }
-        res.status(201).json(response);
+       
     })
         .catch((error) => {
             console.log(error);
