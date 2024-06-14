@@ -65,6 +65,7 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
     }));
 
     const formData = {
+      userId:localStorage.getItem('userId'),
       flightOffers: [flightOffer.flightOffers[0]],
       travellers,
     };

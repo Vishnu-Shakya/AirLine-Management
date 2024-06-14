@@ -64,9 +64,10 @@ const flightBooking = async (req, res) => {
 
         try {
             // Find the user by id and update the bookedTicket array
-            const userId = mongoose.Types.ObjectId(req.body.userId);
+            const foundUser = await User.findOne({ _id:req.body.userId});
+            console.log(foundUser);
             const updatedUser = await User.findByIdAndUpdate(
-                userId,
+                foundUser._id,
                 {
                     $push: {
                         bookedTicket: {
