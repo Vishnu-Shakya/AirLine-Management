@@ -2,6 +2,8 @@ const Amadeus = require("amadeus");
 const { response } = require("express");
 const flights = require("../db/tempFlight.json");
 const User = require('../models/Users.js');
+const mongoose = require("mongoose");
+
 
 const amadeus = new Amadeus({
     clientId: process.env.CLIENT_ID,
