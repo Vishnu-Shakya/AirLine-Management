@@ -24,16 +24,44 @@ function Search({ SERVER_URL, token }) {
     const inputRef2 = useRef(null);
     const suggestionRef1 = useRef(null);
     const suggestionRef2 = useRef(null);
+  // const location = useLocation();
+  // const flights = location.state?.flights || [];
+  // const [loading, setLoading] = useState(false);
+  // const [value, setValue] = useState("");
+  // const [value2, setValue2] = useState("");
+  // const [searchVisible, setSearchVisible] = useState(false);
+  // const [searchVisible2, setSearchVisible2] = useState(false);
+  const [flightdata,setflightdata] = useState(flights.data);
+  // const [departure,setdeparture] = useState("");
+  // const inputRef1 = useRef(null);
+  // const inputRef2 = useRef(null);
+  // // const suggestionRef1 = useRef(null);
+  // // const suggestionRef2 = useRef(null);
 
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (inputRef1.current && !inputRef1.current.contains(event.target) && suggestionRef1.current && !suggestionRef1.current.contains(event.target)) {
-                setSearchVisible(false);
-            }
-            if (inputRef2.current && !inputRef2.current.contains(event.target) && suggestionRef2.current && !suggestionRef2.current.contains(event.target)) {
-                setSearchVisible2(false);
-            }
-        };
+  const changeflightdata = ((flight)=>
+  {
+    setflightdata(flight);
+  })
+console.log(flightdata)
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        inputRef1.current &&
+        !inputRef1.current.contains(event.target) &&
+        suggestionRef1.current &&
+        !suggestionRef1.current.contains(event.target)
+      ) {
+        setSearchVisible(false);
+      }
+      if (
+        inputRef2.current &&
+        !inputRef2.current.contains(event.target) &&
+        suggestionRef2.current &&
+        !suggestionRef2.current.contains(event.target)
+      ) {
+        setSearchVisible2(false);
+      }
+    };
 
         document.addEventListener("mousedown", handleClickOutside);
         return () => {
@@ -193,50 +221,69 @@ function Search({ SERVER_URL, token }) {
     };
 
   
-    return (
-        <div className="searchpage" id="divToPrint">
-            <div className="border-2 ">
-                <form className="search-form search-active">
-                    <div className="search-buttons ">
-                        <div id="oneway" onClick={owshow}>
-                            <span>One-way </span>
-                        </div>
-                        <div id="roundtrip" onClick={rtshow}>
-                            <span>Round-Trip</span>
-                        </div>
-                        <div id="searchbutton" onClick={sshow}>
-                            <span >Search</span>
-                        </div>
-                    </div>
-                    <div id="searchactive" className="w-[80%] mx-auto">
-                        <div className="search-input-field searchfirst" ref={inputRef1}>
-                            <label htmlFor="search-from">From:</label>
-                            <input type="text" id="search-from" placeholder="JFK" value={value} onFocus={handleFocus1} onChange={changeVal} name="from" />
-                            {searchVisible && (
-                                <ul className="search-search-options" ref={suggestionRef1}>
-                                    {airportdata
-                                        .filter((e) => {
-                                            const gin = value.toLowerCase();
-                                            const toki = e.code.toLowerCase() + " " + e.name.toLowerCase() + " " + e.city.toLowerCase();
-                                            const toki2 = e.code.toLowerCase() + "-" + e.name.toLowerCase() + "-" + e.city.toLowerCase();
-                                            return toki.includes(gin) || toki2.includes(gin);
-                                        })
-                                        .slice(0, 5)
-                                        .map((e) => (
-                                            <li
-                                                className="search-s-o-l"
-                                                key={e.code}
-                                                onClick={() => {
-                                                    setValue(e.code + "-" + e.name + "-" + e.city);
-                                                    setSearchVisible(false);
-                                                }}
-                                            >
-                                                {e.code + "-" + e.name + "-" + e.city}
-                                            </li>
-                                        ))}
-                                </ul>
-                            )}
-                        </div>
+  return (
+    <div className="searchpage">
+      <div className="border-2 ">
+        <form className="search-form search-active">
+          <div className="search-buttons ">
+            <div id="oneway" onClick={owshow}>
+              <span>One-way </span>
+            </div>
+            <div id="roundtrip" onClick={rtshow}>
+              <span>Round-Trip</span>
+            </div>
+            <div id="searchbutton" onClick={sshow}>
+              <span>Search</span>
+            </div>
+          </div>
+          <div id="searchactive" className="w-[80%] mx-auto">
+
+            <div className="search-input-field searchfirst" ref={inputRef1}>
+              <label htmlFor="search-from">From:</label>
+              <input
+                type="text"
+                id="search-from"
+                placeholder="JFK"
+                value={value}
+                onFocus={handleFocus1}
+                onChange={changeVal}
+                name="from"
+              />
+              {searchVisible && (
+                <ul className="search-search-options" ref={suggestionRef1}>
+                  {airportdata
+                    .filter((e) => {
+                      const gin = value.toLowerCase();
+                      const toki =
+                        e.code.toLowerCase() +
+                        " " +
+                        e.name.toLowerCase() +
+                        " " +
+                        e.city.toLowerCase();
+                      const toki2 =
+                        e.code.toLowerCase() +
+                        "-" +
+                        e.name.toLowerCase() +
+                        "-" +
+                        e.city.toLowerCase();
+                      return toki.includes(gin) || toki2.includes(gin);
+                    })
+                    .slice(0, 5)
+                    .map((e) => (
+                      <li
+                        className="search-s-o-l"
+                        key={e.code}
+                        onClick={() => {
+                          setValue(e.code + "-" + e.name + "-" + e.city);
+                          setSearchVisible(false);
+                        }}
+                      >
+                        {e.code + "-" + e.name + "-" + e.city}
+                      </li>
+                    ))}
+                </ul>
+              )}
+            </div>
 
                         <div className="search-input-field searchsecond" ref={inputRef2}>
                             <label htmlFor="search-to">To:</label>
@@ -267,37 +314,45 @@ function Search({ SERVER_URL, token }) {
                             )}
                         </div>
 
-                        <div className="search-input-field">
-                            <label htmlFor="search-departure">Departure:</label>
-                            <input type="date" id="search-departure" name="departure" />
-                        </div>
-                        <div className="search-input-field">
-                            <label htmlFor="search-return">Return:</label>
-                            <input type="date" id="search-return" name="return" />
-                        </div>
-                        <div className="search-input-field searchbuttonthree">
-                            <label htmlFor="search-class ">Class:</label>
-                            <select id="search-class" name="class">
-                                <option value="economy">Economy</option>
-                                <option value="business">Business</option>
-                                <option value="first">First</option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
+            <div className="search-input-field">
+              <label htmlFor="search-departure">Departure:</label>
+              <input type="date" id="search-departure" name="departure" />
             </div>
-            <div className="flex justify-around pt-4 mx-auto">
-                <div className="w-1/5 hidden lg:flex">
-                    <Filters></Filters>
-                </div>
-                <div className="w-[100%] lg:w-[67%]" >
-                    {flights.data.map((flight, index) => (
-                        <FlightCard key={index} flight={flight} SERVER_URL={SERVER_URL} dictionaries={flights.dictionaries} />
-                    ))}
-                </div>
+            <div className="search-input-field">
+              <label htmlFor="search-return">Return:</label>
+              <input type="date" id="search-return" name="return" />
             </div>
+            <div className="search-input-field searchbuttonthree">
+              <label htmlFor="search-class ">Class:</label>
+              <select id="search-class" name="class">
+                <option value="economy">Economy</option>
+                <option value="business">Business</option>
+                <option value="first">First</option>
+              </select>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div className="flex justify-around pt-4 mx-auto">
+        <div className="w-1/5 hidden lg:flex">
+          <Filters
+          a = {flightdata}
+          setA = {changeflightdata}
+          real={flights.data}></Filters>
         </div>
-    );
+        <div className="w-[100%] lg:w-[67%]">
+          {flightdata.map((flight, index) => (
+            <FlightCard
+              key={index}
+              flight={flight}
+              SERVER_URL={SERVER_URL}
+              dictionaries={flights.dictionaries}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default Search;
