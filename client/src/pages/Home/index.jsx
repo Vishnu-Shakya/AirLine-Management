@@ -95,7 +95,7 @@ const Home = ({ SERVER_URL, auth }) => {
             // else
 
             console.log(`${SERVER_URL} + "/search-flights"\n`,`formData:`,formData);
-            const response = await axios.post(SERVER_URL + "/search-flights", formData);
+            const response =async await axios.post(SERVER_URL + "/search-flights", formData);
             console.log(response);
             if (response.status === 200) {
                 setLoading(false);
