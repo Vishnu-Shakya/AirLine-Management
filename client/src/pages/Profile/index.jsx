@@ -4,7 +4,7 @@ import "./profile.css";
 import axios from "axios";
 import avatar from "../../assets/avatar.jpeg";
 import { toast } from "react-toastify";
-import FlightCard from "../../components/FlightCard.jsx";
+import Ticket from "../../components/tickets";
 
 const Profile = ({ SERVER_URL, handleStateChange }) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -17,8 +17,8 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
         pincode: "477001",
         state: "Madhya Pradesh",
     });
-    const [bookedTicket, setBookedTicket] = useState(null);
-
+    const [bookedTicket, setBookedTicket] = useState([]);
+   
     const maxDate = new Date().toISOString().split("T")[0];
 
     useEffect(() => {
@@ -40,8 +40,8 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
                     });
                     const { bookedTicket } = response.data.foundUser;
                     const response2 = await axios.post(SERVER_URL + "/ticketInfo", bookedTicket);
-                    console.log("response2:", response2);
                     setBookedTicket(response2.data);
+                    console.log(response2);
                 } else {
                     console.error("Something went wrong");
                 }
@@ -83,7 +83,6 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
 
         try {
             const response = await axios.post(`${SERVER_URL}/profileUpdate`, formData);
-            console.log(response);
             if (response.status == 200) {
                 toast.success(response.data.msg);
             } else {
@@ -118,21 +117,6 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
     return (
         <div>
             <div className="flex flex-col justify-center items-center w-4/5 mx-auto">
-                {/* <div className="left">
-          <div className="flex flex-col justify-center items-center m-4">
-            <img src={avatar} alt="" className='bg-green-400 w-36 h-36 rounded-lg' />
-            <p>{profileInfo.name}</p>
-          </div>
-
-          <div className="flex flex-col items-start p-6">
-            <p className='nav-link flex nav-active' onClick={navActiveLinkHandle}>Profile</p>
-            <p className='nav-link flex' onClick={navActiveLinkHandle}>Login details</p>
-            <p className='nav-link flex' onClick={navActiveLinkHandle}>Save travelers</p>
-            <p className='nav-link flex' onClick={navActiveLinkHandle}>Booked ticket</p>
-            <p className='nav-link flex' onClick={navActiveLinkHandle}>Ticket history</p>
-            <p className='nav-link flex' onClick={handleLogoutClick}>Logout</p>
-          </div>
-        </div> */}
                 <div className="right">
                     <div className="profile-info">
                         <h3 className="text-[2rem]">My Profile</h3>
@@ -212,8 +196,7 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
                                     <span>{profileInfo.state}</span>
                                 </div>
                                 <button className="edit-button" onClick={handleEditClick}>
-                                    {" "}
-                                    Edit{" "}
+                                    Edit
                                 </button>
                             </div>
                         )}
@@ -221,9 +204,12 @@ const Profile = ({ SERVER_URL, handleStateChange }) => {
                 </div>
                 <div className="right">
                     <div className="bg-white p-5 rounded-[5px] ">
-                        <h3 className="text-[2rem]">Your Booked Ticket</h3>
-                        {bookedTicket ? <p>design to ticket history </p> : <p>No Booked ticket</p>}
-                        <div className=" w-[90%] h-96"></div>
+                        <h3 className="text-[2rem]">Your Booked Tickets</h3>
+                        {bookedTicket.length > 0 ? (
+                            bookedTicket.map((ticket, index) => <Ticket key={index} ticket={ticket} />)
+                        ) : (
+                            <p>No Booked Tickets</p>
+                        )}
                     </div>
                     <div className="flex w-[90%] h-[400px]"></div>
                 </div>

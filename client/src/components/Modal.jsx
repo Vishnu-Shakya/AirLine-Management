@@ -28,6 +28,9 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
   const baggage = () => {
     return includedCheckedBags.quantity;
   }
+  const baggage1 = () => {
+    return (includedCheckedBags.weight +" "+ includedCheckedBags.weightUnit)
+  }
 
   const handlePassengerChange = (e, type) => {
     const value = parseInt(e.target.value);
@@ -157,7 +160,7 @@ const Modal = ({ show, onClose, flightOffer, flight, SERVER_URL }) => {
             </p>
             <p>
               <strong>Number of baggages allowed: </strong>
-              {baggage()}
+              {baggage()} {baggage1()}
             </p>
           </div>
 
