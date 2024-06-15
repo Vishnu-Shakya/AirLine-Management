@@ -164,7 +164,7 @@ const Home = ({ SERVER_URL, auth }) => {
                                             const toki2 = e.code.toLowerCase() + "-" + e.name.toLowerCase() + "-" + e.city.toLowerCase();
                                             return toki.includes(gin) || toki2.includes(gin);
                                         })
-                                        .slice(0, 5)
+                                        .slice(0, 3)
                                         .map((e) => (
                                             <li
                                                 className="s-o-l"
@@ -196,7 +196,7 @@ const Home = ({ SERVER_URL, auth }) => {
                                 <option value="business">Business</option>
                                 <option value="first">First</option>
                             </select>
-                        </div>
+                        </div> 
                         <button onClick={searchFlights} className="h-8">
                             {loading ? "Searching..." : "Search"}
                         </button>

@@ -5,6 +5,7 @@ import Filters from "../../components/Filters";
 import FlightCard from "../../components/FlightCard";
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import "./dashboard.css";
 import axios from "axios";
 import airportdata from "../../assets/airports.js";
@@ -12,6 +13,8 @@ console.log(airportdata[0]);
 
 
 function Search({ SERVER_URL, token }) {
+  const navigate = useNavigate();
+  const [departureDate, setDepartureDate] = useState(null);
     const location = useLocation();
     const flights = location.state?.flights || [];
     const [loading, setLoading] = useState(false);
@@ -37,7 +40,16 @@ function Search({ SERVER_URL, token }) {
   // const inputRef2 = useRef(null);
   // // const suggestionRef1 = useRef(null);
   // // const suggestionRef2 = useRef(null);
-
+  const today = new Date().toISOString().split("T")[0];
+  const handleDepartureDateChange = (e) => {
+    setDepartureDate(e.target.value);
+    const returnDateInput = document.getElementById("searchReturn");
+    console.log(returnDateInput);
+    if (returnDateInput) {
+        console.log(returnDateInput.value);
+        returnDateInput.value = e.target.value;
+    }
+};
   const changeflightdata = ((flight)=>
   {
     setflightdata(flight);
@@ -175,7 +187,8 @@ console.log(flightdata)
         document.getElementById("roundtrip").style.color = "white";
     };
 
-    const sshow = () => {
+    const sshow = async (e) => {
+        e.preventDefault();
         var x = document.getElementById("oneway");
         var y = document.getElementById("roundtrip");
         document.getElementById("oneway").style.background = "white";
@@ -218,18 +231,64 @@ console.log(flightdata)
 
         document.getElementById("roundtrip").style.color = "#007bff";
         document.getElementById("roundtrip").style.border = "1px #007bff solid";
+
+        // e.preventDefault(); // Prevent default form submission
+    
+    // Update state to manage UI changes
+    // setSearchVisible(false);
+    // setSearchVisible2(false);
+        // const e = document.getElementById("searchform");
+        
+    // Construct formData object from form inputs and state values
+    const formData = {
+    //     // tripType: e.target.form.sTripType.value, // Assuming you have an input with name="tripType"
+        from: value, // Value from useState for "from"
+        to: value2, // Value from useState for "to"
+        departure: departureDate, // Assuming you have an input with name="departure"
+    //     return: e.children[1].children[3].children[1].value, // Assuming you have an input with name="return"
+    //     class: e.target.form.class.value, // Assuming you have a select with name="class"
+    };
+
+      
+
+      // validation
+
+      if ((formData.from.length > 0) & (formData.to.length > 0) & (formData.departure.length > 0)) {
+
+          var validation=true;
+          // from validation 
+
+
+          // to validation 
+
+
+          // else
+
+          console.log(`${SERVER_URL} + "/search-flights"\n`,`formData:`,formData);
+          const response = await axios.post(SERVER_URL + "/search-flights", formData);
+          console.log(response);
+          if (response.status === 200) {
+              setLoading(false);
+              navigate("/search", { state: { flights: response.data } });
+              setflightdata(()=>flights.data)
+          }else{
+            console.log("error")
+          }
+      } else {
+          toast.error("please input airport");
+      }
     };
 
   
   return (
     <div className="searchpage">
-      <div className="border-2 ">
-        <form className="search-form search-active">
+      <div className="border-2 " >
+        <form className="search-form search-active" id = "searchform">
           <div className="search-buttons ">
-            <div id="oneway" onClick={owshow}>
+            <div id="oneway" name = "sTripType" value = "one-way" onClick={owshow}>
               <span>One-way </span>
             </div>
-            <div id="roundtrip" onClick={rtshow}>
+            <div id="roundtrip" name = "sTripType" value = "rount-trip"onClick={rtshow}>
               <span>Round-Trip</span>
             </div>
             <div id="searchbutton" onClick={sshow}>
@@ -316,11 +375,11 @@ console.log(flightdata)
 
             <div className="search-input-field">
               <label htmlFor="search-departure">Departure:</label>
-              <input type="date" id="search-departure" name="departure" />
+              <input type="date" id="departure" name="departure" min={today} defaultValue={today} value = {departureDate} onChange={handleDepartureDateChange} />
             </div>
             <div className="search-input-field">
               <label htmlFor="search-return">Return:</label>
-              <input type="date" id="search-return" name="return" />
+              <input type="date" id="return" name="return" min={departureDate ? departureDate : today} defaultValue={departureDate} />
             </div>
             <div className="search-input-field searchbuttonthree">
               <label htmlFor="search-class ">Class:</label>

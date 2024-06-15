@@ -4,12 +4,12 @@ const Filters = ({ a, setA, real }) => {
   
   const [selectedfilters,setfilters]  = useState([]);
   const [slideprice,setslideprice] = useState(30000);
-  
+  const [r1,setr1] = useState(real);
   const handlechangefun = (e) =>{setslideprice(e.target.value)
     // handleclickfun("cc");
 
   };
-  let r1 = real;
+  
   useEffect(() => {
     let filteredFlights = r1;
 
@@ -20,7 +20,7 @@ const Filters = ({ a, setA, real }) => {
 
 
     setA(filteredFlights);
-  }, [slideprice]); 
+  }, [slideprice,r1]); 
 
 
   
@@ -56,6 +56,7 @@ const Filters = ({ a, setA, real }) => {
       setA(() => {
         if(selectedfilters.length===0)
           {
+            setr1(real);  
             return real;
           }
         for(let i =0;i<selectedfilters.length;i++)
@@ -159,7 +160,7 @@ const Filters = ({ a, setA, real }) => {
                           {
                             for (let j = 0; j < real.length; j++) {
                               let s = real[j].itineraries[0].segments[0].departure.at;
-                              if (s.slice(11, 13) < "06") {
+                              if (s.slice(11, 13) >= "05" && s.slice(11,13)<"12") {
                                 if(!fin.includes(real[j]))
                                   {
                                     fin.push(real[j]);
@@ -215,7 +216,7 @@ const Filters = ({ a, setA, real }) => {
         // fin = fin.filter((e) =>(parseInt(e.price.base)<=slideprice))
 
         console.log(fin.length);
-        r1 = fin;
+        setr1(()=>fin);
         return fin;
         });},[selectedfilters])        
     
@@ -245,11 +246,11 @@ const Filters = ({ a, setA, real }) => {
       <h2 className="font-bold mt-4">One Way Price</h2>
       <div className="flex justify-between mt-2">
         <span>₹0</span>
-        <span>{slideprice}</span>
-        <span>₹2,00,000</span>
+        <span>{"₹" + slideprice}</span>
+        <span>₹5,00,000</span>
         
       </div>
-      <input type="range" min = "0" max = "200000"  step = "10" value = {slideprice} 
+      <input type="range" min = "0" max = "500000"  step = "1000" value = {slideprice} 
       onChange={handlechangefun} className="w-full mt-2" />
 
       <h2 className="font-bold mt-4">Stops From New Delhi</h2>
