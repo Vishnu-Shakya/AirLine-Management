@@ -1,15 +1,16 @@
 import React, { useState,useEffect } from "react";
 
+
 const Filters = ({ a, setA, real }) => {
   
   const [selectedfilters,setfilters]  = useState([]);
   const [slideprice,setslideprice] = useState(30000);
   const [r1,setr1] = useState(real);
-  const handlechangefun = (e) =>{setslideprice(e.target.value)
-    // handleclickfun("cc");
+  const handlechangefun = (e) =>{setslideprice(e.target.value)};
 
-  };
-  
+  // const [dea,setdea] = useState(real[0].itineraries[0].segments[0].departure.iataCode );
+  // const [arr,setarr] = useState(real[0].itineraries[0].segments[real[0].itineraries[0].segments.length-1].arrival.iataCode );
+  // console.log(dea);
   useEffect(() => {
     let filteredFlights = r1;
 
@@ -218,12 +219,12 @@ const Filters = ({ a, setA, real }) => {
         console.log(fin.length);
         setr1(()=>fin);
         return fin;
-        });},[selectedfilters])        
+        });},[selectedfilters,real])        
     
  
   
 
-  console.log(real);
+  
   return (
     <div className="w-[98%] p-4 border-r border-gray-300 mx-auto bg-[#fff] ">
       <h2 className="font-bold">Popular Filters</h2>
@@ -253,7 +254,7 @@ const Filters = ({ a, setA, real }) => {
       <input type="range" min = "0" max = "500000"  step = "1000" value = {slideprice} 
       onChange={handlechangefun} className="w-full mt-2" />
 
-      <h2 className="font-bold mt-4">Stops From New Delhi</h2>
+      <h2 className="font-bold mt-4">Number of Stops</h2>
       <div className="flex items-center mt-2">
         <input type="checkbox" id="nonStop" onClick={()=>handleclickfun("xns")}/>
         <label htmlFor="nonStop" className="ml-2">
@@ -267,7 +268,7 @@ const Filters = ({ a, setA, real }) => {
         </label>
       </div>
 
-      <h2 className="font-bold mt-4">Departure From New Delhi</h2>
+      <h2 className="font-bold mt-4">Time of Departure</h2>
       <div className="grid grid-cols-2 gap-2 mt-2">
         <div
           className="flex flex-col items-center p-2 border border-gray-300 rounded" id = "b6"
@@ -295,7 +296,7 @@ const Filters = ({ a, setA, real }) => {
         </div>
       </div>
 
-      <h2 className="font-bold mt-4">Arrival at Mumbai</h2>
+      <h2 className="font-bold mt-4">Time of Arrival</h2>
       <div className="grid grid-cols-2 gap-2 mt-2">
         <div
           className="flex flex-col items-center p-2 border border-gray-300 rounded" id = "aa6"
