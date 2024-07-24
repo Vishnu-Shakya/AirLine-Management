@@ -21,7 +21,7 @@ The Flight ticket booking  webstite is composed of the following Features:
 
 ## Sign In Page
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](docs/1.png)
 
 ## search Page
 
