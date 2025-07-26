@@ -3,12 +3,17 @@ const router = express.Router();
 
 const {signup,login,auth,profileUpdate,profileInfo}=require('../controllers/signup');
 const {searchFlight,flightPricing,flightBooking,ticketInfo,ticketCancel}=require('../controllers/flight')
+const {makePayment}=require('../service/payments/payment')
 
 router.route('/signup').post(signup);
 router.route('/login').post(login);
 router.route('/auth').post(auth);
 router.route('/profile/:userId').get(profileInfo);
 router.route('/profileUpdate').post(profileUpdate);
+
+// payment routes 
+
+router.route('/payment').post(makePayment)
 
 // flight service api 
 router.route('/search-flights').post(searchFlight);

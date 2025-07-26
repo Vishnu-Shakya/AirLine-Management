@@ -1,7 +1,7 @@
 // Ticket.jsx
 import React, { useState } from "react";
 import { jsPDF } from "jspdf";
-import "jspdf-autotable";
+// import "jspdf-autotable";
 import "./tickets.css"; // Import your CSS file for styling
 
 const Ticket = ({ ticket }) => {

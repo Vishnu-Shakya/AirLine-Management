@@ -36,7 +36,7 @@ const signup = async (req, res) => {
 
 
 const login = async (req, res) => {
-    // console.log(req.body);
+    console.log(req.body);
     const { email, password } = req.body;
     try {
         if (email.length && password.length) {

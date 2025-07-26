@@ -1,5 +1,4 @@
 const Amadeus = require("amadeus");
-const { response } = require("express");
 const flights = require("../db/tempFlight.json");
 const User = require('../models/Users.js');
 const mongoose = require("mongoose");
@@ -23,7 +22,7 @@ const searchFlight = async (req, res) => {
             max: 10,
         })
         .then((response) => {
-            console.log(response);
+            console.log("statusCode",response.statusCode,response.data);
             res.status(200).json(response.result);
         })
         .catch((error) => {
@@ -51,19 +50,20 @@ const flightPricing = async (req, res) => {
 };
 const flightBooking = async (req, res) => {
     console.log(req.body);
+    const {userId,travellers,ticket}=req.body.payload.payment.entity.notes
     amadeus.booking.flightOrders.post(
         JSON.stringify({
             data: {
                 type: 'flight-order',
-                flightOffers: [req.body.flightOffers[0]],
-                travelers: req.body.travellers
+                flightOffers: [ticket],
+                travelers: travellers
             }
         })
     ).then(async (response) => {
         console.log(response.data);
         try {
             // Find the user by id and update the bookedTicket array
-            const foundUser = await User.findOne({ _id: req.body.userId });
+            const foundUser = await User.findOne({ _id: userId });
             const updatedUser = await User.findByIdAndUpdate(
                 foundUser._id,
                 {
@@ -82,7 +82,7 @@ const flightBooking = async (req, res) => {
                 console.log("Booked ticket added successfully:", updatedUser);
                 res.status(201).json(response);
             } else {
-                console.log("User not found");
+                console.warn("User not found");
             }
         } catch (error) {
             console.error("Error adding booked ticket:", error);
@@ -130,25 +130,6 @@ const ticketCancel = async (req, res) => {
             console.error('Error fetching booking details:', error);
             throw new Error(error.message);
         })
-
-    // try {
-    //     const resultPromises = bookedTickets.map(ticket =>
-    //         amadeus.booking.flightOrder(ticket.flightId).get()
-    //             .then(response => response.data)
-    //             .catch(error => {
-    //                 console.error('Error fetching booking details:', error);
-    //                 throw new Error(error.message);
-    //             })
-    //     );
-
-    //     const results = await Promise.all(resultPromises);
-
-    //     res.status(200).json(results);
-
-    // } catch (error) {
-    //     console.error('Error:', error);
-    //     res.status(500).send(error.message);
-    // }
 };
 
 
