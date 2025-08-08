@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "node server.js",
     "start": "node server.js",
-    "vercel-build": "echo 'No build step'"
+    "build": "echo 'No build step'"
   },
   "keywords": [],
   "author": "",
